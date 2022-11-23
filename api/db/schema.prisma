@@ -1,0 +1,136 @@
+datasource db {
+  provider = "postgres"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider      = "prisma-client-js"
+  binaryTargets = "native"
+}
+
+// Define your own datamodels here and run `yarn redwood prisma migrate dev`
+// to create migrations for them and apply to your dev DB.
+// TODO: Please remove the following example:
+model User {
+  id                  Int              @id @default(autoincrement())
+  email               String           @unique
+  firstName           String
+  lastName            String
+  hashedPassword      String
+  salt                String
+  resetToken          String?
+  resetTokenExpiresAt DateTime?
+  webAuthnChallenge   String?          @unique
+  credentials         UserCredential[]
+  roles               UserRole[]
+}
+
+model UserCredential {
+  id         Int     @id @default(autoincrement())
+  userId     Int
+  user       User    @relation(fields: [userId], references: [id])
+  publicKey  Bytes
+  transports String?
+  counter    BigInt
+}
+
+model Role {
+  id        Int        @id @default(autoincrement())
+  name      String
+  createdAt DateTime   @default(now())
+  updateAt  DateTime
+  createdBy Int        @default(0)
+  updatedBy Int
+  users     UserRole[]
+}
+
+model UserRole {
+  id        Int      @id @default(autoincrement())
+  userId    Int
+  roleId    Int
+  createdAt DateTime @default(now())
+  updateAt  DateTime
+  createdBy Int      @default(0)
+  updatedBy Int
+  user      User     @relation(fields: [userId], references: [id])
+  role      Role     @relation(fields: [roleId], references: [id])
+}
+
+model Company {
+  id        Int           @id @default(autoincrement())
+  name      String        @unique
+  address1  String
+  address2  String
+  city      String
+  zipcode   String
+  country   String
+  createdAt DateTime      @default(now())
+  updateAt  DateTime
+  createdBy Int           @default(0)
+  updatedBy Int drivers   driver[]
+  cars      car[]
+  users     userCompany[]
+}
+
+model CarModel {
+  id        Int            @id @default(autoincrement())
+  name      String
+  createdAt DateTime       @default(now())
+  updateAt  DateTime
+  createdBy Int            @default(0)
+  updatedBy Int
+  models    CarModelMake[]
+}
+
+model CarModelMake {
+  id        Int      @id @default(autoincrement())
+  name      String
+  createdAt DateTime @default(now())
+  updateAt  DateTime
+  createdBy Int      @default(0)
+  updatedBy Int
+  carMakeId Int
+  make      CarModel @relation(fields: [carMakeId], references: [id])
+  cars      car[]
+}
+
+model driver {
+  id        Int      @id @default(autoincrement())
+  name      String
+  email     String
+  phone     String
+  dob       DateTime
+  companyId Int
+  createdAt DateTime @default(now())
+  updateAt  DateTime
+  createdBy Int      @default(0)
+  updatedBy Int
+  company   Company  @relation(fields: [companyId], references: [id])
+  cars      car[]
+}
+
+model car {
+  id          Int          @id @default(autoincrement())
+  registrtion String
+  regDate     DateTime
+  makeId      Int
+  driverId    Int
+  companyId   Int
+  createdAt   DateTime     @default(now())
+  updateAt    DateTime
+  createdBy   Int          @default(0)
+  updatedBy   Int
+  carmake     CarModelMake @relation(fields: [makeId], references: [id])
+  driver      driver       @relation(fields: [driverId], references: [id])
+  company     Company      @relation(fields: [companyId], references: [id])
+}
+
+model userCompany {
+  id        Int      @id @default(autoincrement())
+  companyId Int
+  createdAt DateTime @default(now())
+  updateAt  DateTime
+  createdBy Int      @default(0)
+  updatedBy Int
+  company   Company  @relation(fields: [companyId], references: [id])
+}
