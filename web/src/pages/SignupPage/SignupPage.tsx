@@ -17,11 +17,11 @@ import { toast, Toaster } from '@redwoodjs/web/toast'
 const SignupPage = () => {
   const { isAuthenticated, signUp } = useAuth()
 
-  useEffect(() => {
-    if (isAuthenticated) {
-      navigate(routes.home())
-    }
-  }, [isAuthenticated])
+  // useEffect(() => {
+  //   if (isAuthenticated) {
+  //     navigate(routes.home())
+  //   }
+  // }, [isAuthenticated])
 
   // focus on email box on page load
   const usernameRef = useRef<HTMLInputElement>(null)
@@ -39,6 +39,7 @@ const SignupPage = () => {
     } else {
       // user is signed in automatically
       toast.success('Welcome!')
+      navigate(routes.login())
     }
   }
 
@@ -77,6 +78,48 @@ const SignupPage = () => {
                     }}
                   />
                   <FieldError name="username" className="rw-field-error" />
+
+                  <Label
+                    name="firstname"
+                    className="rw-label"
+                    errorClassName="rw-label rw-label-error"
+                  >
+                    First Name
+                  </Label>
+                  <TextField
+                    name="firstname"
+                    className="rw-input"
+                    errorClassName="rw-input rw-input-error"
+                    ref={usernameRef}
+                    validation={{
+                      required: {
+                        value: true,
+                        message: 'First Name is required',
+                      },
+                    }}
+                  />
+                  <FieldError name="firstname" className="rw-field-error" />
+
+                  <Label
+                    name="lastname"
+                    className="rw-label"
+                    errorClassName="rw-label rw-label-error"
+                  >
+                    Last Name
+                  </Label>
+                  <TextField
+                    name="lastname"
+                    className="rw-input"
+                    errorClassName="rw-input rw-input-error"
+                    ref={usernameRef}
+                    validation={{
+                      required: {
+                        value: true,
+                        message: 'Last Name is required',
+                      },
+                    }}
+                  />
+                  <FieldError name="lastname" className="rw-field-error" />
 
                   <Label
                     name="password"

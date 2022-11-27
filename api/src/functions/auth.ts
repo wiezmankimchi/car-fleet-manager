@@ -39,6 +39,12 @@ export const handler = async (
     },
   }
 
+  // const logoutOptions: DbAuthHandlerOptions['logout'] = {
+  //   handler: (user) => {
+  //     return user
+  //   },
+  //   expires: 0,
+  // }
   const loginOptions: DbAuthHandlerOptions['login'] = {
     // handler() is called after finding the user that matches the
     // username/password provided at login, but before actually considering them
@@ -114,7 +120,8 @@ export const handler = async (
           email: username,
           hashedPassword: hashedPassword,
           salt: salt,
-          // name: userAttributes.name
+          firstName: userAttributes.firstname,
+          lastName: userAttributes.lastname,
         },
       })
     },

@@ -33,6 +33,7 @@ const LoginPage = ({ type }) => {
   // should redirect right after login or wait to show the webAuthn prompts?
   useEffect(() => {
     if (isAuthenticated && (!shouldShowWebAuthn || webAuthn.isEnabled())) {
+      toast.success(WELCOME_MESSAGE)
       navigate(REDIRECT)
     }
   }, [isAuthenticated, shouldShowWebAuthn])

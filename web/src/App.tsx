@@ -1,6 +1,5 @@
 import { AuthProvider } from '@redwoodjs/auth'
 import WebAuthnClient from '@redwoodjs/auth/webAuthn'
-import WebAuthnClient from '@redwoodjs/auth/webAuthn'
 import { FatalErrorBoundary, RedwoodProvider } from '@redwoodjs/web'
 import { RedwoodApolloProvider } from '@redwoodjs/web/apollo'
 
@@ -9,6 +8,8 @@ import Routes from 'src/Routes'
 
 import './scaffold.css'
 import './index.css'
+import './i18n/i18n'
+import './i18n'
 
 const App = () => (
   <FatalErrorBoundary page={FatalErrorPage}>
