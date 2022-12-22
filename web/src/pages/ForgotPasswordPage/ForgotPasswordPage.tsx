@@ -1,5 +1,7 @@
 import { useEffect, useRef } from 'react'
 
+import { useTranslation } from 'react-i18next'
+
 import { useAuth } from '@redwoodjs/auth'
 import { Form, Label, TextField, Submit, FieldError } from '@redwoodjs/forms'
 import { navigate, routes } from '@redwoodjs/router'
@@ -8,6 +10,7 @@ import { toast, Toaster } from '@redwoodjs/web/toast'
 
 const ForgotPasswordPage = () => {
   const { isAuthenticated, forgotPassword } = useAuth()
+  const { t, i18n } = useTranslation()
 
   useEffect(() => {
     if (isAuthenticated) {
@@ -36,6 +39,7 @@ const ForgotPasswordPage = () => {
     }
   }
 
+  document.body.dir = i18n.dir()
   return (
     <>
       <MetaTags title="Forgot Password" />
@@ -46,7 +50,7 @@ const ForgotPasswordPage = () => {
           <div className="rw-segment">
             <header className="rw-segment-header">
               <h2 className="rw-heading rw-heading-secondary">
-                Forgot Password
+                {t('Forgot Password?')}
               </h2>
             </header>
 
@@ -56,10 +60,10 @@ const ForgotPasswordPage = () => {
                   <div className="text-left">
                     <Label
                       name="username"
-                      className="rw-label"
+                      className="rw-label rtl:text-right"
                       errorClassName="rw-label rw-label-error"
                     >
-                      Username
+                      {t('User Name')}
                     </Label>
                     <TextField
                       name="username"
@@ -75,7 +79,9 @@ const ForgotPasswordPage = () => {
                   </div>
 
                   <div className="rw-button-group">
-                    <Submit className="rw-button rw-button-blue">Submit</Submit>
+                    <Submit className="rw-button rw-button-blue">
+                      {t('Reset Password')}
+                    </Submit>
                   </div>
                 </Form>
               </div>

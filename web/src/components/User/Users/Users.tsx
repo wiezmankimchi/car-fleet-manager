@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next'
 import type { DeleteUserMutationVariables, FindUsers } from 'types/graphql'
 
 import { Link, routes } from '@redwoodjs/router'
@@ -16,6 +17,7 @@ const DELETE_USER_MUTATION = gql`
 `
 
 const UsersList = ({ users }: FindUsers) => {
+  const { t, i18n } = useTranslation()
   const [deleteUser] = useMutation(DELETE_USER_MUTATION, {
     onCompleted: () => {
       toast.success('User deleted')
@@ -36,15 +38,17 @@ const UsersList = ({ users }: FindUsers) => {
     }
   }
 
+  document.body.dir = i18n.dir()
+
   return (
     <div className="rw-segment rw-table-wrapper-responsive">
       <table className="rw-table">
         <thead>
           <tr>
-            <th>Id</th>
-            <th>Email</th>
-            <th>First name</th>
-            <th>Last name</th>
+            <th className="rtl:text-right">{t('ID')}</th>
+            <th className="rtl:text-right">{t('Email')}</th>
+            <th className="rtl:text-right">{t('First Name')}</th>
+            <th className="rtl:text-right">{t('Last Name')}</th>
 
             <th>&nbsp;</th>
           </tr>
@@ -64,14 +68,14 @@ const UsersList = ({ users }: FindUsers) => {
                     title={'Show user ' + user.id + ' detail'}
                     className="rw-button rw-button-small"
                   >
-                    Show
+                    {t('Show')}
                   </Link>
                   <Link
                     to={routes.editUser({ id: user.id })}
                     title={'Edit user ' + user.id}
                     className="rw-button rw-button-small rw-button-blue"
                   >
-                    Edit
+                    {t('Edit')}
                   </Link>
                   <button
                     type="button"
@@ -79,7 +83,7 @@ const UsersList = ({ users }: FindUsers) => {
                     className="rw-button rw-button-small rw-button-red"
                     onClick={() => onDeleteClick(user.id)}
                   >
-                    Delete
+                    {t('Delete')}
                   </button>
                 </nav>
               </td>

@@ -1,6 +1,8 @@
 import { useRef } from 'react'
 import { useEffect } from 'react'
 
+import { useTranslation } from 'react-i18next'
+
 import { useAuth } from '@redwoodjs/auth'
 import {
   Form,
@@ -15,7 +17,8 @@ import { MetaTags } from '@redwoodjs/web'
 import { toast, Toaster } from '@redwoodjs/web/toast'
 
 const SignupPage = () => {
-  const { isAuthenticated, signUp } = useAuth()
+  const { signUp } = useAuth()
+  const { t, i18n } = useTranslation()
 
   // useEffect(() => {
   //   if (isAuthenticated) {
@@ -43,6 +46,8 @@ const SignupPage = () => {
     }
   }
 
+  document.body.dir = i18n.dir()
+
   return (
     <>
       <MetaTags title="Signup" />
@@ -52,7 +57,9 @@ const SignupPage = () => {
         <div className="rw-scaffold rw-login-container">
           <div className="rw-segment">
             <header className="rw-segment-header">
-              <h2 className="rw-heading rw-heading-secondary">Signup</h2>
+              <h2 className="rw-heading rw-heading-secondary">
+                {t('Sign Up')}
+              </h2>
             </header>
 
             <div className="rw-segment-main">
@@ -60,10 +67,10 @@ const SignupPage = () => {
                 <Form onSubmit={onSubmit} className="rw-form-wrapper">
                   <Label
                     name="username"
-                    className="rw-label"
+                    className="rw-label rtl:text-right"
                     errorClassName="rw-label rw-label-error"
                   >
-                    Username
+                    {t('User Name')}
                   </Label>
                   <TextField
                     name="username"
@@ -81,10 +88,10 @@ const SignupPage = () => {
 
                   <Label
                     name="firstname"
-                    className="rw-label"
+                    className="rw-label rtl:text-right"
                     errorClassName="rw-label rw-label-error"
                   >
-                    First Name
+                    {t('First Name')}
                   </Label>
                   <TextField
                     name="firstname"
@@ -102,10 +109,10 @@ const SignupPage = () => {
 
                   <Label
                     name="lastname"
-                    className="rw-label"
+                    className="rw-label rtl:text-right"
                     errorClassName="rw-label rw-label-error"
                   >
-                    Last Name
+                    {t('Last Name')}
                   </Label>
                   <TextField
                     name="lastname"
@@ -123,10 +130,10 @@ const SignupPage = () => {
 
                   <Label
                     name="password"
-                    className="rw-label"
+                    className="rw-label rtl:text-right"
                     errorClassName="rw-label rw-label-error"
                   >
-                    Password
+                    {t('Password')}
                   </Label>
                   <PasswordField
                     name="password"
@@ -144,7 +151,7 @@ const SignupPage = () => {
 
                   <div className="rw-button-group">
                     <Submit className="rw-button rw-button-blue">
-                      Sign Up
+                      {t('Sign Up')}
                     </Submit>
                   </div>
                 </Form>
@@ -152,9 +159,9 @@ const SignupPage = () => {
             </div>
           </div>
           <div className="rw-login-link">
-            <span>Already have an account?</span>{' '}
+            <span>{t('Already have an account?')}</span>{' '}
             <Link to={routes.login()} className="rw-link">
-              Log in!
+              {t('Log in!')}
             </Link>
           </div>
         </div>

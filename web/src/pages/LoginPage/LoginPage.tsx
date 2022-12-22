@@ -1,6 +1,8 @@
 import { useRef, useState } from 'react'
 import { useEffect } from 'react'
 
+import { useTranslation } from 'react-i18next'
+
 import { useAuth } from '@redwoodjs/auth'
 import {
   Form,
@@ -29,6 +31,7 @@ const LoginPage = ({ type }) => {
   const [showWebAuthn, setShowWebAuthn] = useState(
     webAuthn.isEnabled() && type !== 'password'
   )
+  const { t, i18n } = useTranslation()
 
   // should redirect right after login or wait to show the webAuthn prompts?
   useEffect(() => {
@@ -144,10 +147,10 @@ const LoginPage = ({ type }) => {
     <Form onSubmit={onSubmit} className="rw-form-wrapper">
       <Label
         name="username"
-        className="rw-label"
+        className="rw-label rtl:text-right"
         errorClassName="rw-label rw-label-error"
       >
-        Username
+        {t('User Name')}
       </Label>
       <TextField
         name="username"
@@ -167,10 +170,10 @@ const LoginPage = ({ type }) => {
 
       <Label
         name="password"
-        className="rw-label"
+        className="rw-label rtl:text-right"
         errorClassName="rw-label rw-label-error"
       >
-        Password
+        {t('Password')}
       </Label>
       <PasswordField
         name="password"
@@ -187,14 +190,14 @@ const LoginPage = ({ type }) => {
 
       <div className="rw-forgot-link">
         <Link to={routes.forgotPassword()} className="rw-forgot-link">
-          Forgot Password?
+          {t('Forgot Password?')}
         </Link>
       </div>
 
       <FieldError name="password" className="rw-field-error" />
 
       <div className="rw-button-group">
-        <Submit className="rw-button rw-button-blue">Login</Submit>
+        <Submit className="rw-button rw-button-blue">{t('Login')}</Submit>
       </div>
     </Form>
   )
@@ -216,9 +219,9 @@ const LoginPage = ({ type }) => {
       if (webAuthn.isEnabled()) {
         return (
           <div className="rw-login-link">
-            <span>or login with </span>{' '}
+            <span>or {t('login with')} </span>{' '}
             <a href="?type=password" className="rw-link">
-              username and password
+              {t('username and password')}
             </a>
           </div>
         )
@@ -226,9 +229,9 @@ const LoginPage = ({ type }) => {
     } else {
       return (
         <div className="rw-login-link">
-          <span>Don&apos;t have an account?</span>{' '}
+          <span>{t("Don't have an account?")}</span>{' '}
           <Link to={routes.signup()} className="rw-link">
-            Sign up!
+            {t('Sign up!')}
           </Link>
         </div>
       )
@@ -239,6 +242,8 @@ const LoginPage = ({ type }) => {
     return null
   }
 
+  document.body.dir = i18n.dir()
+
   return (
     <>
       <MetaTags title="Login" />
@@ -248,7 +253,7 @@ const LoginPage = ({ type }) => {
         <div className="rw-scaffold rw-login-container">
           <div className="rw-segment">
             <header className="rw-segment-header">
-              <h2 className="rw-heading rw-heading-secondary">Login</h2>
+              <h2 className="rw-heading rw-heading-secondary">{t('Login')}</h2>
             </header>
 
             <div className="rw-segment-main">

@@ -1,3 +1,7 @@
+import { useTranslation } from 'react-i18next'
+import type { EditUserById, UpdateUserInput } from 'types/graphql'
+
+// import { hashPassword } from '@redwoodjs/api'
 import {
   Form,
   FormError,
@@ -7,18 +11,13 @@ import {
   DatetimeLocalField,
   Submit,
 } from '@redwoodjs/forms'
-
-import type { EditUserById, UpdateUserInput } from 'types/graphql'
 import type { RWGqlError } from '@redwoodjs/forms'
-
-
 
 const formatDatetime = (value) => {
   if (value) {
     return value.replace(/:\d{2}\.\d{3}\w/, '')
   }
 }
-
 
 type FormUser = NonNullable<EditUserById['user']>
 
@@ -30,32 +29,16 @@ interface UserFormProps {
 }
 
 const UserForm = (props: UserFormProps) => {
+  const { t } = useTranslation()
+
+  props?.user?.id
+    ? console.log(`<><><> Edit User <><><> ${props.user.hashedPassword}`)
+    : console.log(`<><><> New User <><><> `)
+
   const onSubmit = (data: FormUser) => {
-  
-    
-    
-  
-    
-    
-  
-    
-    
-  
-    
-    
-  
-    
-    
-  
-    
-    
-  
-    
-    
-  
-    
-    
-  
+    props?.user?.id
+      ? console.log(`<><><> Edit User <><><> ${data.hashedPassword}`)
+      : console.log(`<><><> New User <><><>`)
     props.onSave(data, props?.user?.id)
   }
 
@@ -68,78 +51,74 @@ const UserForm = (props: UserFormProps) => {
           titleClassName="rw-form-error-title"
           listClassName="rw-form-error-list"
         />
-      
+
         <Label
           name="email"
-          className="rw-label"
+          className="rw-label rtl:text-right"
           errorClassName="rw-label rw-label-error"
         >
-          Email
+          {t('Email')}
         </Label>
-        
-          <TextField
-            name="email"
-            defaultValue={props.user?.email}
-            className="rw-input"
-            errorClassName="rw-input rw-input-error"
-            validation={{ required: true }}
-          />
-        
+
+        <TextField
+          name="email"
+          defaultValue={props.user?.email}
+          className="rw-input"
+          errorClassName="rw-input rw-input-error"
+          validation={{ required: true }}
+        />
 
         <FieldError name="email" className="rw-field-error" />
 
         <Label
           name="firstName"
-          className="rw-label"
+          className="rw-label rtl:text-right"
           errorClassName="rw-label rw-label-error"
         >
-          First name
+          {t('First Name')}
         </Label>
-        
-          <TextField
-            name="firstName"
-            defaultValue={props.user?.firstName}
-            className="rw-input"
-            errorClassName="rw-input rw-input-error"
-          />
-        
+
+        <TextField
+          name="firstName"
+          defaultValue={props.user?.firstName}
+          className="rw-input"
+          errorClassName="rw-input rw-input-error"
+        />
 
         <FieldError name="firstName" className="rw-field-error" />
 
         <Label
           name="lastName"
-          className="rw-label"
+          className="rw-label rtl:text-right"
           errorClassName="rw-label rw-label-error"
         >
-          Last name
+          {t('Last Name')}
         </Label>
-        
-          <TextField
-            name="lastName"
-            defaultValue={props.user?.lastName}
-            className="rw-input"
-            errorClassName="rw-input rw-input-error"
-          />
-        
+
+        <TextField
+          name="lastName"
+          defaultValue={props.user?.lastName}
+          className="rw-input"
+          errorClassName="rw-input rw-input-error"
+        />
 
         <FieldError name="lastName" className="rw-field-error" />
 
-        <Label
+        {/* <Label
           name="hashedPassword"
-          className="rw-label"
+          className="rw-label rtl:text-right"
           errorClassName="rw-label rw-label-error"
         >
-          Hashed password
+          {t('Password')}
         </Label>
-        
-          <TextField
-            name="hashedPassword"
-            defaultValue={props.user?.hashedPassword}
-            className="rw-input"
-            errorClassName="rw-input rw-input-error"
-            validation={{ required: true }}
-          />
-        
+
+        <PasswordField
+          name="hashedPassword"
+          defaultValue={props.user?.hashedPassword}
+          className="rw-input"
+          errorClassName="rw-input rw-input-error"
+          validation={{ required: true }}
+        />
 
         <FieldError name="hashedPassword" className="rw-field-error" />
 
@@ -150,15 +129,14 @@ const UserForm = (props: UserFormProps) => {
         >
           Salt
         </Label>
-        
-          <TextField
-            name="salt"
-            defaultValue={props.user?.salt}
-            className="rw-input"
-            errorClassName="rw-input rw-input-error"
-            validation={{ required: true }}
-          />
-        
+
+        <TextField
+          name="salt"
+          defaultValue={props.user?.salt}
+          className="rw-input"
+          errorClassName="rw-input rw-input-error"
+          validation={{ required: true }}
+        />
 
         <FieldError name="salt" className="rw-field-error" />
 
@@ -169,14 +147,13 @@ const UserForm = (props: UserFormProps) => {
         >
           Reset token
         </Label>
-        
-          <TextField
-            name="resetToken"
-            defaultValue={props.user?.resetToken}
-            className="rw-input"
-            errorClassName="rw-input rw-input-error"
-          />
-        
+
+        <TextField
+          name="resetToken"
+          defaultValue={props.user?.resetToken}
+          className="rw-input"
+          errorClassName="rw-input rw-input-error"
+        />
 
         <FieldError name="resetToken" className="rw-field-error" />
 
@@ -187,14 +164,13 @@ const UserForm = (props: UserFormProps) => {
         >
           Reset token expires at
         </Label>
-        
-          <DatetimeLocalField
-            name="resetTokenExpiresAt"
-            defaultValue={formatDatetime(props.user?.resetTokenExpiresAt)}
-            className="rw-input"
-            errorClassName="rw-input rw-input-error"
-          />
-        
+
+        <DatetimeLocalField
+          name="resetTokenExpiresAt"
+          defaultValue={formatDatetime(props.user?.resetTokenExpiresAt)}
+          className="rw-input"
+          errorClassName="rw-input rw-input-error"
+        />
 
         <FieldError name="resetTokenExpiresAt" className="rw-field-error" />
 
@@ -205,22 +181,18 @@ const UserForm = (props: UserFormProps) => {
         >
           Web authn challenge
         </Label>
-        
-          <TextField
-            name="webAuthnChallenge"
-            defaultValue={props.user?.webAuthnChallenge}
-            className="rw-input"
-            errorClassName="rw-input rw-input-error"
-          />
-        
 
-        <FieldError name="webAuthnChallenge" className="rw-field-error" />
+        <TextField
+          name="webAuthnChallenge"
+          defaultValue={props.user?.webAuthnChallenge}
+          className="rw-input"
+          errorClassName="rw-input rw-input-error"
+        />
+
+        <FieldError name="webAuthnChallenge" className="rw-field-error" />*/}
 
         <div className="rw-button-group">
-          <Submit
-            disabled={props.loading}
-            className="rw-button rw-button-blue"
-          >
+          <Submit disabled={props.loading} className="rw-button rw-button-blue">
             Save
           </Submit>
         </div>
