@@ -43,10 +43,23 @@ export const deleteCarModelMake: MutationResolvers['deleteCarModelMake'] = ({
 }
 
 export const CarModelMake: CarModelMakeRelationResolvers = {
+  createdByUser: (_obj, { root }) => {
+    return db.carModelMake
+      .findUnique({ where: { id: root?.id } })
+      .createdByUser()
+  },
+  updatedByUser: (_obj, { root }) => {
+    return db.carModelMake
+      .findUnique({ where: { id: root?.id } })
+      .updatedByUser()
+  },
   make: (_obj, { root }) => {
     return db.carModelMake.findUnique({ where: { id: root?.id } }).make()
   },
   cars: (_obj, { root }) => {
     return db.carModelMake.findUnique({ where: { id: root?.id } }).cars()
+  },
+  User: (_obj, { root }) => {
+    return db.carModelMake.findUnique({ where: { id: root?.id } }).User()
   },
 }

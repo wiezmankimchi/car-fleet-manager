@@ -13,6 +13,16 @@ export const QUERY = gql`
       updateAt
       createdBy
       updatedBy
+      createdByUser {
+        id
+        firstName
+        lastName
+      }
+      updatedByUser {
+        id
+        firstName
+        lastName
+      }
     }
   }
 `

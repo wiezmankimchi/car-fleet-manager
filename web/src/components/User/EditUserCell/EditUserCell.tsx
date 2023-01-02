@@ -1,3 +1,4 @@
+import { useTranslation, Trans } from 'react-i18next'
 import type { EditUserById, UpdateUserInput } from 'types/graphql'
 
 import { navigate, routes } from '@redwoodjs/router'
@@ -45,30 +46,27 @@ export const Failure = ({ error }: CellFailureProps) => (
 )
 
 export const Success = ({ user }: CellSuccessProps<EditUserById>) => {
-  const [updateUser, { loading, error }] = useMutation(
-    UPDATE_USER_MUTATION,
-    {
-      onCompleted: () => {
-        toast.success('User updated')
-        navigate(routes.users())
-      },
-      onError: (error) => {
-        toast.error(error.message)
-      },
-    }
-  )
+  const { t, i18n } = useTranslation()
+  const [updateUser, { loading, error }] = useMutation(UPDATE_USER_MUTATION, {
+    onCompleted: () => {
+      toast.success('User updated')
+      navigate(routes.users())
+    },
+    onError: (error) => {
+      toast.error(error.message)
+    },
+  })
 
-  const onSave = (
-    input: UpdateUserInput,
-    id: EditUserById['user']['id']
-  ) => {
+  const onSave = (input: UpdateUserInput, id: EditUserById['user']['id']) => {
     updateUser({ variables: { id, input } })
   }
 
   return (
     <div className="rw-segment">
       <header className="rw-segment-header">
-        <h2 className="rw-heading rw-heading-secondary">Edit User {user?.id}</h2>
+        <h2 className="rw-heading rw-heading-secondary">
+          {t('Edit User')} {user?.id}
+        </h2>
       </header>
       <div className="rw-segment-main">
         <UserForm user={user} onSave={onSave} error={error} loading={loading} />

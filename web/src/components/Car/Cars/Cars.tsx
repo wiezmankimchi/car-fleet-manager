@@ -3,7 +3,7 @@ import { useMutation } from '@redwoodjs/web'
 import { toast } from '@redwoodjs/web/toast'
 
 import { QUERY } from 'src/components/Car/CarsCell'
-import { timeTag, truncate } from 'src/lib/formatters'
+import { timeTag, truncate, consoler } from 'src/lib/formatters'
 
 import type { DeleteCarMutationVariables, FindCars } from 'types/graphql'
 

@@ -31,35 +31,27 @@ describe('companies', () => {
   scenario('creates a company', async () => {
     const result = await createCompany({
       input: {
-        name: 'String2341182',
-        address1: 'String',
-        address2: 'String',
+        name: 'String7846194',
         city: 'String',
         zipcode: 'String',
         country: 'String',
-        updateAt: '2022-11-25T18:11:39.130Z',
-        updatedBy: 918249,
       },
     })
 
-    expect(result.name).toEqual('String2341182')
-    expect(result.address1).toEqual('String')
-    expect(result.address2).toEqual('String')
+    expect(result.name).toEqual('String7846194')
     expect(result.city).toEqual('String')
     expect(result.zipcode).toEqual('String')
     expect(result.country).toEqual('String')
-    expect(result.updateAt).toEqual(new Date('2022-11-25T18:11:39.130Z'))
-    expect(result.updatedBy).toEqual(918249)
   })
 
   scenario('updates a company', async (scenario: StandardScenario) => {
     const original = (await company({ id: scenario.company.one.id })) as Company
     const result = await updateCompany({
       id: original.id,
-      input: { name: 'String79857192' },
+      input: { name: 'String90913102' },
     })
 
-    expect(result.name).toEqual('String79857192')
+    expect(result.name).toEqual('String90913102')
   })
 
   scenario('deletes a company', async (scenario: StandardScenario) => {

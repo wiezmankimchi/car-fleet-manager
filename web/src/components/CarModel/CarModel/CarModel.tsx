@@ -1,11 +1,14 @@
+import { Trans, useTranslation } from 'react-i18next'
+import type {
+  DeleteCarModelMutationVariables,
+  FindCarModelById,
+} from 'types/graphql'
 
 import { Link, routes, navigate } from '@redwoodjs/router'
 import { useMutation } from '@redwoodjs/web'
 import { toast } from '@redwoodjs/web/toast'
 
-import { timeTag,  } from 'src/lib/formatters'
-
-import type { DeleteCarModelMutationVariables, FindCarModelById } from 'types/graphql'
+import { timeTag, truncate, consoler } from 'src/lib/formatters'
 
 const DELETE_CAR_MODEL_MUTATION = gql`
   mutation DeleteCarModelMutation($id: Int!) {
@@ -20,9 +23,10 @@ interface Props {
 }
 
 const CarModel = ({ carModel }: Props) => {
+  const { t, i18n } = useTranslation()
   const [deleteCarModel] = useMutation(DELETE_CAR_MODEL_MUTATION, {
     onCompleted: () => {
-      toast.success('CarModel deleted')
+      toast.success('Car Brand deleted')
       navigate(routes.carModels())
     },
     onError: (error) => {
@@ -31,39 +35,59 @@ const CarModel = ({ carModel }: Props) => {
   })
 
   const onDeleteClick = (id: DeleteCarModelMutationVariables['id']) => {
-    if (confirm('Are you sure you want to delete carModel ' + id + '?')) {
+    if (confirm('Are you sure you want to delete Car Brand ' + id + '?')) {
       deleteCarModel({ variables: { id } })
     }
   }
 
+  document.body.dir = i18n.dir()
   return (
     <>
       <div className="rw-segment">
         <header className="rw-segment-header">
           <h2 className="rw-heading rw-heading-secondary">
-            CarModel {carModel.id} Detail
+            <Trans i18nKey="carBrandDetails">
+              Car Brand{{ carModelID: carModel.id }} Details
+            </Trans>
           </h2>
         </header>
         <table className="rw-table">
           <tbody>
             <tr>
-              <th>Id</th>
+              <th>{t('ID')}</th>
               <td>{carModel.id}</td>
-            </tr><tr>
-              <th>Name</th>
+            </tr>
+            <tr>
+              <th>{t('Name')}</th>
               <td>{carModel.name}</td>
-            </tr><tr>
-              <th>Created at</th>
-              <td>{timeTag(carModel.createdAt)}</td>
-            </tr><tr>
-              <th>Update at</th>
-              <td>{timeTag(carModel.updateAt)}</td>
-            </tr><tr>
-              <th>Created by</th>
-              <td>{carModel.createdBy}</td>
-            </tr><tr>
-              <th>Updated by</th>
-              <td>{carModel.updatedBy}</td>
+            </tr>
+            <tr>
+              <th>{t('Created At')}</th>
+
+              <td className="text-xs">
+                {timeTag(carModel.createdAt, i18n.language)}
+                <Link
+                  to={routes.user({ id: carModel?.createdBy })}
+                  className="m-3 text-xs"
+                >
+                  {truncate(carModel?.createdByUser?.firstName)}{' '}
+                  {truncate(carModel?.createdByUser?.lastName)}
+                </Link>
+              </td>
+            </tr>
+
+            <tr>
+              <th>{t('Updated At')}</th>
+              <td className="text-xs">
+                {timeTag(carModel.updateAt, i18n.language)}
+                <Link
+                  to={routes.user({ id: carModel?.updatedBy })}
+                  className="m-3 text-xs"
+                >
+                  {truncate(carModel?.updatedByUser?.firstName)}{' '}
+                  {truncate(carModel?.updatedByUser?.lastName)}
+                </Link>
+              </td>
             </tr>
           </tbody>
         </table>
@@ -73,14 +97,14 @@ const CarModel = ({ carModel }: Props) => {
           to={routes.editCarModel({ id: carModel.id })}
           className="rw-button rw-button-blue"
         >
-          Edit
+          {t('Edit')}
         </Link>
         <button
           type="button"
           className="rw-button rw-button-red"
           onClick={() => onDeleteClick(carModel.id)}
         >
-          Delete
+          {t('Delete')}
         </button>
       </nav>
     </>

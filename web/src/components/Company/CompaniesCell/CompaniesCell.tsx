@@ -1,3 +1,4 @@
+import { useTranslation, Trans } from 'react-i18next'
 import type { FindCompanies } from 'types/graphql'
 
 import { Link, routes } from '@redwoodjs/router'
@@ -19,6 +20,16 @@ export const QUERY = gql`
       updateAt
       createdBy
       updatedBy
+      createdByUser {
+        id
+        firstName
+        lastName
+      }
+      updatedByUser {
+        id
+        firstName
+        lastName
+      }
     }
   }
 `
@@ -26,14 +37,13 @@ export const QUERY = gql`
 export const Loading = () => <div>Loading...</div>
 
 export const Empty = () => {
+  const { t } = useTranslation()
   return (
     <div className="rw-text-center">
-      {'No companies yet. '}
-      <Link
-        to={routes.newCompany()}
-        className="rw-link"
-      >
-        {'Create one?'}
+      {t('No companies yet. ')}
+      <Link to={routes.newCompany()} className="rw-link">
+        <Trans i18nKey="CreateOneFemale">Create one?</Trans>
+        {/* {'Create one?'} */}
       </Link>
     </div>
   )

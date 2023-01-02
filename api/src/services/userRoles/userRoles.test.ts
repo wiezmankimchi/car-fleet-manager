@@ -33,15 +33,11 @@ describe('userRoles', () => {
       input: {
         userId: scenario.userRole.two.userId,
         roleId: scenario.userRole.two.roleId,
-        updateAt: '2022-11-25T18:14:11.946Z',
-        updatedBy: 9542350,
       },
     })
 
     expect(result.userId).toEqual(scenario.userRole.two.userId)
     expect(result.roleId).toEqual(scenario.userRole.two.roleId)
-    expect(result.updateAt).toEqual(new Date('2022-11-25T18:14:11.946Z'))
-    expect(result.updatedBy).toEqual(9542350)
   })
 
   scenario('updates a userRole', async (scenario: StandardScenario) => {
@@ -50,10 +46,10 @@ describe('userRoles', () => {
     })) as UserRole
     const result = await updateUserRole({
       id: original.id,
-      input: { updateAt: '2022-11-26T18:14:11.946Z' },
+      input: { userId: scenario.userRole.two.userId },
     })
 
-    expect(result.updateAt).toEqual(new Date('2022-11-26T18:14:11.946Z'))
+    expect(result.userId).toEqual(scenario.userRole.two.userId)
   })
 
   scenario('deletes a userRole', async (scenario: StandardScenario) => {

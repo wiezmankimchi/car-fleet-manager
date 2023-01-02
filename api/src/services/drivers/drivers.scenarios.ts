@@ -1,28 +1,14 @@
-import type { Prisma, driver } from '@prisma/client'
+import type { Prisma, Driver } from '@prisma/client'
 import type { ScenarioData } from '@redwoodjs/testing/api'
 
-export const standard = defineScenario<Prisma.driverCreateArgs>({
+export const standard = defineScenario<Prisma.DriverCreateArgs>({
   driver: {
     one: {
       data: {
         name: 'String',
         email: 'String',
         phone: 'String',
-        dob: '2022-11-25T18:12:31.393Z',
-        updateAt: '2022-11-25T18:12:31.393Z',
-        updatedBy: 4111277,
-        company: {
-          create: {
-            name: 'String4178861',
-            address1: 'String',
-            address2: 'String',
-            city: 'String',
-            zipcode: 'String',
-            country: 'String',
-            updateAt: '2022-11-25T18:12:31.393Z',
-            updatedBy: 8292305,
-          },
-        },
+        dob: '2022-12-31T03:35:40.661Z',
       },
     },
     two: {
@@ -30,24 +16,10 @@ export const standard = defineScenario<Prisma.driverCreateArgs>({
         name: 'String',
         email: 'String',
         phone: 'String',
-        dob: '2022-11-25T18:12:31.393Z',
-        updateAt: '2022-11-25T18:12:31.393Z',
-        updatedBy: 786883,
-        company: {
-          create: {
-            name: 'String5777292',
-            address1: 'String',
-            address2: 'String',
-            city: 'String',
-            zipcode: 'String',
-            country: 'String',
-            updateAt: '2022-11-25T18:12:31.393Z',
-            updatedBy: 4519910,
-          },
-        },
+        dob: '2022-12-31T03:35:40.661Z',
       },
     },
   },
 })
 
-export type StandardScenario = ScenarioData<driver, 'driver'>
+export type StandardScenario = ScenarioData<Driver, 'driver'>

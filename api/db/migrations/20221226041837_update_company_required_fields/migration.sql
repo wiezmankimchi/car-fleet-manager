@@ -1,0 +1,3 @@
+-- AlterTable
+ALTER TABLE "Company" ALTER COLUMN "updateAt" DROP NOT NULL,
+ALTER COLUMN "updatedBy" DROP NOT NULL;

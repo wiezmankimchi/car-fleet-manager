@@ -7,12 +7,16 @@ export const schema = gql`
     driverId: Int!
     companyId: Int!
     createdAt: DateTime!
-    updateAt: DateTime!
-    createdBy: Int!
-    updatedBy: Int!
+    updateAt: DateTime
+    createdBy: Int
+    updatedBy: Int
+    createdByUser: User
+    updatedByUser: User
     carmake: CarModelMake!
     driver: Driver!
-    company: Company!
+    company: Company
+    User: User
+    userId: Int
   }
 
   type Query {
@@ -26,9 +30,10 @@ export const schema = gql`
     makeId: Int!
     driverId: Int!
     companyId: Int!
-    updateAt: DateTime!
-    createdBy: Int!
-    updatedBy: Int!
+    updateAt: DateTime
+    createdBy: Int
+    updatedBy: Int
+    userId: Int
   }
 
   input UpdateCarInput {
@@ -40,6 +45,7 @@ export const schema = gql`
     updateAt: DateTime
     createdBy: Int
     updatedBy: Int
+    userId: Int
   }
 
   type Mutation {

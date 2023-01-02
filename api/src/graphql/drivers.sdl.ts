@@ -7,10 +7,12 @@ export const schema = gql`
     dob: DateTime!
     companyId: Int!
     createdAt: DateTime!
-    updateAt: DateTime!
-    createdBy: Int!
-    updatedBy: Int!
-    company: Company!
+    updateAt: DateTime
+    createdBy: Int
+    updatedBy: Int
+    createdByUser: User
+    updatedByUser: User
+    company: Company
     cars: [Car]!
   }
 
@@ -25,9 +27,9 @@ export const schema = gql`
     phone: String!
     dob: DateTime!
     companyId: Int!
-    updateAt: DateTime!
-    createdBy: Int!
-    updatedBy: Int!
+    updateAt: DateTime
+    createdBy: Int
+    updatedBy: Int
   }
 
   input UpdateDriverInput {

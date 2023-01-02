@@ -3,6 +3,7 @@ import { useTranslation } from 'react-i18next'
 import { useAuth } from '@redwoodjs/auth'
 import { routes, Link } from '@redwoodjs/router'
 
+import { isAuthenticated } from 'src/lib/auth'
 import {
   foursquares,
   piechart,
@@ -13,6 +14,7 @@ import {
   bellAlert,
   car,
   car2CV,
+  carBlack,
   driver,
   loginEnter,
   logoutExit,
@@ -55,7 +57,7 @@ const SideNavEntry = ({
 
 const SideNav = () => {
   const { t, i18n } = useTranslation()
-  const { logOut } = useAuth()
+  const { logOut, currentUser, isAuthenticated } = useAuth()
   const signOut = () => {
     logOut()
   }
@@ -115,11 +117,6 @@ const SideNav = () => {
                   linkto={routes.cars()}
                 />
                 <SideNavEntry
-                  entry="Models"
-                  icon={car2CV()}
-                  linkto={routes.carModelMakes()}
-                />
-                <SideNavEntry
                   entry="Drivers"
                   icon={driver()}
                   linkto={routes.drivers()}
@@ -133,6 +130,16 @@ const SideNav = () => {
                   linkto={routes.users()}
                 />
                 <SideNavEntry
+                  entry="Models"
+                  icon={carBlack()}
+                  linkto={routes.carModelMakes()}
+                />
+                <SideNavEntry
+                  entry="Brands"
+                  icon={car2CV()}
+                  linkto={routes.carModels()}
+                />
+                <SideNavEntry
                   entry="Log In"
                   icon={loginEnter()}
                   linkto={routes.login()}
@@ -144,7 +151,7 @@ const SideNav = () => {
                     onClick={() => signOut()}
                   >
                     {logoutExit()}
-                    <span className="ltr:ml-3 rtl:mr-3 flex-1 whitespace-nowrap">
+                    <span className="flex-1 whitespace-nowrap ltr:ml-3 rtl:mr-3">
                       {t('Log Out')}
                     </span>
                   </button>
@@ -153,6 +160,12 @@ const SideNav = () => {
             </div>
           </div>
         </div>
+        {isAuthenticated && (
+          <div className="text-xs">
+            logged in: {currentUser.id} {currentUser.firstName}{' '}
+            {currentUser.lastName}
+          </div>
+        )}
       </aside>
       <div
         className="fixed inset-0 z-10 hidden bg-gray-900 opacity-50"

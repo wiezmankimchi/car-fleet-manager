@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next'
 import type { EditCompanyById, UpdateCompanyInput } from 'types/graphql'
 
 import { navigate, routes } from '@redwoodjs/router'
@@ -49,6 +50,7 @@ export const Failure = ({ error }: CellFailureProps) => (
 )
 
 export const Success = ({ company }: CellSuccessProps<EditCompanyById>) => {
+  const { t } = useTranslation()
   const [updateCompany, { loading, error }] = useMutation(
     UPDATE_COMPANY_MUTATION,
     {
@@ -72,10 +74,17 @@ export const Success = ({ company }: CellSuccessProps<EditCompanyById>) => {
   return (
     <div className="rw-segment">
       <header className="rw-segment-header">
-        <h2 className="rw-heading rw-heading-secondary">Edit Company {company?.id}</h2>
+        <h2 className="rw-heading rw-heading-secondary rtl:text-right">
+          {t('Edit Company ')}: {company?.name}
+        </h2>
       </header>
       <div className="rw-segment-main">
-        <CompanyForm company={company} onSave={onSave} error={error} loading={loading} />
+        <CompanyForm
+          company={company}
+          onSave={onSave}
+          error={error}
+          loading={loading}
+        />
       </div>
     </div>
   )

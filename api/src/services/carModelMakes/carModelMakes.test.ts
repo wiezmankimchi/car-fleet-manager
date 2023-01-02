@@ -33,17 +33,10 @@ describe('carModelMakes', () => {
 
   scenario('creates a carModelMake', async (scenario: StandardScenario) => {
     const result = await createCarModelMake({
-      input: {
-        name: 'String',
-        updateAt: '2022-11-25T18:12:13.548Z',
-        updatedBy: 3059586,
-        carMakeId: scenario.carModelMake.two.carMakeId,
-      },
+      input: { name: 'String', carMakeId: scenario.carModelMake.two.carMakeId },
     })
 
     expect(result.name).toEqual('String')
-    expect(result.updateAt).toEqual(new Date('2022-11-25T18:12:13.548Z'))
-    expect(result.updatedBy).toEqual(3059586)
     expect(result.carMakeId).toEqual(scenario.carModelMake.two.carMakeId)
   })
 

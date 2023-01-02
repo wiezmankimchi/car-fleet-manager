@@ -16,13 +16,13 @@ export const jsonTruncate = (obj: unknown) => {
   return truncate(JSON.stringify(obj, null, 2))
 }
 
-export const timeTag = (dateTime?: string) => {
+export const timeTag = (dateTime?: string, language?: string) => {
   let output: string | JSX.Element = ''
 
   if (dateTime) {
     output = (
       <time dateTime={dateTime} title={dateTime}>
-        {new Date(dateTime).toUTCString()}
+        {new Date(dateTime).toLocaleDateString(language)}
       </time>
     )
   }
@@ -44,4 +44,10 @@ export const numberPercentFormatter = (value: number) => {
     return percent.toString() + '%'
   }
   return value?.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',') + '%'
+}
+
+export const consoler = (_where, value?) => {
+  if (process.env.NODE_ENV === 'development') {
+    console.log('Debug message:', _where, value)
+  }
 }

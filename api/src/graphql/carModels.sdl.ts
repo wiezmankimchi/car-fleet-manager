@@ -3,22 +3,32 @@ export const schema = gql`
     id: Int!
     name: String!
     createdAt: DateTime!
-    updateAt: DateTime!
-    createdBy: Int!
-    updatedBy: Int!
+    updateAt: DateTime
+    createdBy: Int
+    updatedBy: Int
+    User: User
+    createdByUser: User
+    updatedByUser: User
     models: [CarModelMake]!
+    userId: Int
   }
 
+  type ModelSet {
+    models: [CarModel]!
+    count: Int!
+  }
   type Query {
+    allModels(page: Int, limit: Int): ModelSet @skipAuth
     carModels: [CarModel!]! @requireAuth
     carModel(id: Int!): CarModel @requireAuth
   }
 
   input CreateCarModelInput {
     name: String!
-    updateAt: DateTime!
-    createdBy: Int!
-    updatedBy: Int!
+    updateAt: DateTime
+    createdBy: Int
+    updatedBy: Int
+    userId: Int
   }
 
   input UpdateCarModelInput {
@@ -26,6 +36,7 @@ export const schema = gql`
     updateAt: DateTime
     createdBy: Int
     updatedBy: Int
+    userId: Int
   }
 
   type Mutation {

@@ -3,7 +3,7 @@ import { Link, routes, navigate } from '@redwoodjs/router'
 import { useMutation } from '@redwoodjs/web'
 import { toast } from '@redwoodjs/web/toast'
 
-import { timeTag,  } from 'src/lib/formatters'
+import { timeTag,consoler  } from 'src/lib/formatters'
 
 import type { DeleteCarModelMakeMutationVariables, FindCarModelMakeById } from 'types/graphql'
 

@@ -12,10 +12,16 @@ import { Set, Router, Route, Private } from '@redwoodjs/router'
 import ScaffoldLayout from 'src/layouts/ScaffoldLayout'
 
 import MainLayout from './layouts/MainLayout/MainLayout'
+import AllModelsPage from './pages/AllModelsPage/AllModelsPage'
 
 const Routes = () => {
   return (
     <Router>
+      <Route path="/support" page={SupportPage} name="support" />
+      <Set>
+        <Route path="/allmodels" page={AllModelsPage} name="allModels" />
+        <Route path="/allmodels/{page:Int}/{limit:Int}" page={AllModelsPage} name="allModelsPage" />
+      </Set>
       <Route path="/alerts" page={AlertsPage} name="alerts" />
       <Set wrap={[MainLayout, ScaffoldLayout]} title="UserRoles" titleTo="userRoles" buttonLabel="New UserRole" buttonTo="newUserRole">
         <Route path="/user-roles/new" page={UserRoleNewUserRolePage} name="newUserRole" />
@@ -23,12 +29,7 @@ const Routes = () => {
         <Route path="/user-roles/{id:Int}" page={UserRoleUserRolePage} name="userRole" />
         <Route path="/user-roles" page={UserRoleUserRolesPage} name="userRoles" />
       </Set>
-      <Set wrap={[MainLayout, ScaffoldLayout]} title="UserCompanies" titleTo="userCompanies" buttonLabel="New UserCompany" buttonTo="newUserCompany">
-        <Route path="/user-companies/new" page={UserCompanyNewUserCompanyPage} name="newUserCompany" />
-        <Route path="/user-companies/{id:Int}/edit" page={UserCompanyEditUserCompanyPage} name="editUserCompany" />
-        <Route path="/user-companies/{id:Int}" page={UserCompanyUserCompanyPage} name="userCompany" />
-        <Route path="/user-companies" page={UserCompanyUserCompaniesPage} name="userCompanies" />
-      </Set>
+
       <Set wrap={[MainLayout, ScaffoldLayout]} title="Cars" titleTo="cars" buttonLabel="New Car" buttonTo="newCar">
         <Route path="/cars/new" page={CarNewCarPage} name="newCar" />
         <Route path="/cars/{id:Int}/edit" page={CarEditCarPage} name="editCar" />
@@ -41,16 +42,17 @@ const Routes = () => {
         <Route path="/drivers/{id:Int}" page={DriverDriverPage} name="driver" />
         <Route path="/drivers" page={DriverDriversPage} name="drivers" />
       </Set>
-      <Set wrap={[MainLayout, ScaffoldLayout]} title="CarModelMakes" titleTo="carModelMakes" buttonLabel="New CarModelMake" buttonTo="newCarModelMake">
+      <Set wrap={[MainLayout, ScaffoldLayout]} title="Car Models Makes" titleTo="carModelMakes" buttonLabel="New CarModelMake" buttonTo="newCarModelMake">
         <Route path="/car-model-makes/new" page={CarModelMakeNewCarModelMakePage} name="newCarModelMake" />
         <Route path="/car-model-makes/{id:Int}/edit" page={CarModelMakeEditCarModelMakePage} name="editCarModelMake" />
         <Route path="/car-model-makes/{id:Int}" page={CarModelMakeCarModelMakePage} name="carModelMake" />
         <Route path="/car-model-makes" page={CarModelMakeCarModelMakesPage} name="carModelMakes" />
       </Set>
-      <Set wrap={[MainLayout, ScaffoldLayout]} title="CarModels" titleTo="carModels" buttonLabel="New CarModel" buttonTo="newCarModel">
+      <Set wrap={[MainLayout, ScaffoldLayout]} title="Car Brands" titleTo="carModels" buttonLabel="New Car Brand" buttonTo="newCarModel">
         <Route path="/car-models/new" page={CarModelNewCarModelPage} name="newCarModel" />
         <Route path="/car-models/{id:Int}/edit" page={CarModelEditCarModelPage} name="editCarModel" />
         <Route path="/car-models/{id:Int}" page={CarModelCarModelPage} name="carModel" />
+        <Route path="/car-models/{page:Int}/{limit:Int}" page={CarModelCarModelsPage} name="carModelsPage" />
         <Route path="/car-models" page={CarModelCarModelsPage} name="carModels" />
       </Set>
       <Set wrap={[MainLayout, ScaffoldLayout]} title="Companies" titleTo="companies" buttonLabel="New Company" buttonTo="newCompany">

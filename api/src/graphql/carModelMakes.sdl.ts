@@ -3,12 +3,16 @@ export const schema = gql`
     id: Int!
     name: String!
     createdAt: DateTime!
-    updateAt: DateTime!
-    createdBy: Int!
-    updatedBy: Int!
+    updateAt: DateTime
+    createdBy: Int
+    updatedBy: Int
     carMakeId: Int!
+    createdByUser: User
+    updatedByUser: User
     make: CarModel!
     cars: [Car]!
+    User: User
+    userId: Int
   }
 
   type Query {
@@ -18,10 +22,11 @@ export const schema = gql`
 
   input CreateCarModelMakeInput {
     name: String!
-    updateAt: DateTime!
-    createdBy: Int!
-    updatedBy: Int!
+    updateAt: DateTime
+    createdBy: Int
+    updatedBy: Int
     carMakeId: Int!
+    userId: Int
   }
 
   input UpdateCarModelMakeInput {
@@ -30,6 +35,7 @@ export const schema = gql`
     createdBy: Int
     updatedBy: Int
     carMakeId: Int
+    userId: Int
   }
 
   type Mutation {

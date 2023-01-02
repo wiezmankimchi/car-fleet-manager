@@ -3,6 +3,10 @@ import SideNav from 'src/components/SideNav/SideNav'
 
 type MainLayoutProps = {
   children?: React.ReactNode
+  title?: string
+  titleTo?: string
+  buttonLabel?: string
+  buttonTo?: string
 }
 
 const MainLayout = ({ children }: MainLayoutProps) => {

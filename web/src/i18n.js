@@ -1,52 +1,29 @@
 import i18n from 'i18next'
-import { initReactI18next } from 'react-i18next'
 import LanguageDetector from 'i18next-browser-languagedetector'
-import fr from './locales/fr.json'
-import en from './locales/en.json'
+import { initReactI18next } from 'react-i18next'
 
-// This is a simple i18n configuration with English and French translations.
-// You can find the translations in web/src/locales/{language}.json
-// see: https://react.i18next.com
-// Here's an example of how to use it in your components, pages or layouts:
-/*
-import { Link, routes } from '@redwoodjs/router'
-import { useTranslation } from 'react-i18next'
+import translationsEN from 'src/locales/en.json'
+import translationsHE from 'src/locales/he.json'
 
-const HomePage = () => {
-  const { t, i18n } = useTranslation()
-  return (
-    <>
-      <h1>{t('HomePage.title')}</h1>
-      <button onClick={() => i18n.changeLanguage('fr')}>fr</button>
-      <button onClick={() => i18n.changeLanguage('en')}>en</button>
-      <p>
-        {t('HomePage.info')} <code>./web/src/pages/HomePage/HomePage.js</code>
-      </p>
-      <p>
-        {t('HomePage.route')} <code>home</code>, {t('HomePage.link')}`
-        <Link to={routes.home()}>Home</Link>`
-      </p>
-    </>
-  )
+const resources = {
+  en: {
+    translation: translationsEN,
+  },
+  he: {
+    translation: translationsHE,
+  },
 }
 
-export default HomePage
-*/
-
 i18n
-  // learn more: https://github.com/i18next/i18next-browser-languageDetector
+  .use(initReactI18next) // passes i18n down to react-i18next
   .use(LanguageDetector)
-  .use(initReactI18next)
   .init({
-    interpolation: { escapeValue: false }, // React already does escaping
-    fallbackLng: 'en',
-    resources: {
-      en: {
-        translation: en,
-      },
-      fr: {
-        translation: fr,
-      },
+    resources,
+    fallbackLng: 'en', // default language
+    keySeparator: false, // we do not use keys in form messages.welcome
+    interpolation: {
+      escapeValue: false, // react already safes from xss
     },
   })
+
 export default i18n

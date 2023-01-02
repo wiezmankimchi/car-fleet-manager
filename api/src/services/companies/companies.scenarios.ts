@@ -5,26 +5,18 @@ export const standard = defineScenario<Prisma.CompanyCreateArgs>({
   company: {
     one: {
       data: {
-        name: 'String481091',
-        address1: 'String',
-        address2: 'String',
+        name: 'String6525286',
         city: 'String',
         zipcode: 'String',
         country: 'String',
-        updateAt: '2022-11-25T18:11:39.155Z',
-        updatedBy: 1767098,
       },
     },
     two: {
       data: {
-        name: 'String8218035',
-        address1: 'String',
-        address2: 'String',
+        name: 'String2262088',
         city: 'String',
         zipcode: 'String',
         country: 'String',
-        updateAt: '2022-11-25T18:11:39.155Z',
-        updatedBy: 3723433,
       },
     },
   },

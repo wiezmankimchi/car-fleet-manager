@@ -1,60 +1,21 @@
-import type { Prisma, car } from '@prisma/client'
+import type { Prisma, Car } from '@prisma/client'
 import type { ScenarioData } from '@redwoodjs/testing/api'
 
-export const standard = defineScenario<Prisma.carCreateArgs>({
+export const standard = defineScenario<Prisma.CarCreateArgs>({
   car: {
     one: {
       data: {
         registrtion: 'String',
-        regDate: '2022-11-25T18:12:47.274Z',
-        updateAt: '2022-11-25T18:12:47.274Z',
-        updatedBy: 2937999,
+        regDate: '2022-12-31T03:35:55.318Z',
         carmake: {
-          create: {
-            name: 'String',
-            updateAt: '2022-11-25T18:12:47.274Z',
-            updatedBy: 6771953,
-            make: {
-              create: {
-                name: 'String',
-                updateAt: '2022-11-25T18:12:47.274Z',
-                updatedBy: 8607279,
-              },
-            },
-          },
+          create: { name: 'String', make: { create: { name: 'String' } } },
         },
         driver: {
           create: {
             name: 'String',
             email: 'String',
             phone: 'String',
-            dob: '2022-11-25T18:12:47.274Z',
-            updateAt: '2022-11-25T18:12:47.274Z',
-            updatedBy: 5051614,
-            company: {
-              create: {
-                name: 'String8176324',
-                address1: 'String',
-                address2: 'String',
-                city: 'String',
-                zipcode: 'String',
-                country: 'String',
-                updateAt: '2022-11-25T18:12:47.274Z',
-                updatedBy: 3523977,
-              },
-            },
-          },
-        },
-        company: {
-          create: {
-            name: 'String8096093',
-            address1: 'String',
-            address2: 'String',
-            city: 'String',
-            zipcode: 'String',
-            country: 'String',
-            updateAt: '2022-11-25T18:12:47.274Z',
-            updatedBy: 564605,
+            dob: '2022-12-31T03:35:55.318Z',
           },
         },
       },
@@ -62,55 +23,16 @@ export const standard = defineScenario<Prisma.carCreateArgs>({
     two: {
       data: {
         registrtion: 'String',
-        regDate: '2022-11-25T18:12:47.274Z',
-        updateAt: '2022-11-25T18:12:47.274Z',
-        updatedBy: 9790329,
+        regDate: '2022-12-31T03:35:55.318Z',
         carmake: {
-          create: {
-            name: 'String',
-            updateAt: '2022-11-25T18:12:47.274Z',
-            updatedBy: 71269,
-            make: {
-              create: {
-                name: 'String',
-                updateAt: '2022-11-25T18:12:47.274Z',
-                updatedBy: 6914295,
-              },
-            },
-          },
+          create: { name: 'String', make: { create: { name: 'String' } } },
         },
         driver: {
           create: {
             name: 'String',
             email: 'String',
             phone: 'String',
-            dob: '2022-11-25T18:12:47.274Z',
-            updateAt: '2022-11-25T18:12:47.274Z',
-            updatedBy: 408179,
-            company: {
-              create: {
-                name: 'String5357393',
-                address1: 'String',
-                address2: 'String',
-                city: 'String',
-                zipcode: 'String',
-                country: 'String',
-                updateAt: '2022-11-25T18:12:47.274Z',
-                updatedBy: 6143532,
-              },
-            },
-          },
-        },
-        company: {
-          create: {
-            name: 'String3052876',
-            address1: 'String',
-            address2: 'String',
-            city: 'String',
-            zipcode: 'String',
-            country: 'String',
-            updateAt: '2022-11-25T18:12:47.274Z',
-            updatedBy: 2943030,
+            dob: '2022-12-31T03:35:55.318Z',
           },
         },
       },
@@ -118,4 +40,4 @@ export const standard = defineScenario<Prisma.carCreateArgs>({
   },
 })
 
-export type StandardScenario = ScenarioData<car, 'car'>
+export type StandardScenario = ScenarioData<Car, 'car'>

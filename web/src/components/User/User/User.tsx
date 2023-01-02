@@ -1,3 +1,4 @@
+import { useTranslation, Trans } from 'react-i18next'
 import type { DeleteUserMutationVariables, FindUserById } from 'types/graphql'
 
 import { Link, routes, navigate } from '@redwoodjs/router'
@@ -19,6 +20,7 @@ interface Props {
 }
 
 const User = ({ user }: Props) => {
+  const { t, i18n } = useTranslation()
   const [deleteUser] = useMutation(DELETE_USER_MUTATION, {
     onCompleted: () => {
       toast.success('User deleted')
@@ -35,12 +37,16 @@ const User = ({ user }: Props) => {
     }
   }
 
+  document.body.dir = i18n.dir()
+
   return (
     <>
       <div className="rw-segment">
         <header className="rw-segment-header">
           <h2 className="rw-heading rw-heading-secondary">
-            User #{user.id} Detail
+            <Trans i18nKey="userMessagesUnread">
+              User #{{ userID: user.id }} Details
+            </Trans>
           </h2>
         </header>
         <table className="rw-table">
@@ -50,15 +56,15 @@ const User = ({ user }: Props) => {
               <td>{user.id}</td>
             </tr>
             <tr>
-              <th>Email</th>
+              <th>{t('Email')}</th>
               <td>{user.email}</td>
             </tr>
             <tr>
-              <th>First name</th>
+              <th>{t('First Name')}</th>
               <td>{user.firstName}</td>
             </tr>
             <tr>
-              <th>Last name</th>
+              <th>{t('Last Name')}</th>
               <td>{user.lastName}</td>
             </tr>
           </tbody>

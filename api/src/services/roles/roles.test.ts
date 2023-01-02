@@ -24,16 +24,10 @@ describe('roles', () => {
 
   scenario('creates a role', async () => {
     const result = await createRole({
-      input: {
-        name: 'String',
-        updateAt: '2022-11-25T18:11:19.778Z',
-        updatedBy: 8664583,
-      },
+      input: { name: 'String' },
     })
 
     expect(result.name).toEqual('String')
-    expect(result.updateAt).toEqual(new Date('2022-11-25T18:11:19.778Z'))
-    expect(result.updatedBy).toEqual(8664583)
   })
 
   scenario('updates a role', async (scenario: StandardScenario) => {

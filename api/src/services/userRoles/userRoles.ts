@@ -41,6 +41,12 @@ export const deleteUserRole: MutationResolvers['deleteUserRole'] = ({ id }) => {
 }
 
 export const UserRole: UserRoleRelationResolvers = {
+  createdByUser: (_obj, { root }) => {
+    return db.userRole.findUnique({ where: { id: root?.id } }).createdByUser()
+  },
+  updatedByUser: (_obj, { root }) => {
+    return db.userRole.findUnique({ where: { id: root?.id } }).updatedByUser()
+  },
   user: (_obj, { root }) => {
     return db.userRole.findUnique({ where: { id: root?.id } }).user()
   },

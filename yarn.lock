@@ -1688,12 +1688,21 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@babel/runtime@npm:^7.0.0, @babel/runtime@npm:^7.10.2, @babel/runtime@npm:^7.12.5, @babel/runtime@npm:^7.14.5, @babel/runtime@npm:^7.16.3, @babel/runtime@npm:^7.17.2, @babel/runtime@npm:^7.17.8, @babel/runtime@npm:^7.18.3, @babel/runtime@npm:^7.18.9, @babel/runtime@npm:^7.19.4, @babel/runtime@npm:^7.5.0, @babel/runtime@npm:^7.7.6, @babel/runtime@npm:^7.8.4, @babel/runtime@npm:^7.9.2":
+"@babel/runtime@npm:^7.0.0, @babel/runtime@npm:^7.10.2, @babel/runtime@npm:^7.12.5, @babel/runtime@npm:^7.14.5, @babel/runtime@npm:^7.16.3, @babel/runtime@npm:^7.17.8, @babel/runtime@npm:^7.18.3, @babel/runtime@npm:^7.18.9, @babel/runtime@npm:^7.19.4, @babel/runtime@npm:^7.5.0, @babel/runtime@npm:^7.7.6, @babel/runtime@npm:^7.8.4, @babel/runtime@npm:^7.9.2":
   version: 7.20.6
   resolution: "@babel/runtime@npm:7.20.6"
   dependencies:
     regenerator-runtime: ^0.13.11
   checksum: 4065f5f72c5c1f4c4cc09cdc9926e82d643bd3490cc09474bc06fbc2412d636bc8acd937a429e397ed39b29bd3920b8f0c3f9b693ee82b22188232c50c418e7d
+  languageName: node
+  linkType: hard
+
+"@babel/runtime@npm:^7.20.6":
+  version: 7.20.7
+  resolution: "@babel/runtime@npm:7.20.7"
+  dependencies:
+    regenerator-runtime: ^0.13.11
+  checksum: 60ff1a1452d0f88b766211604610b92d5e063d7024150b6dab87af238e2a6634c01eff4add9e14b4335ced966640af34196ee4cd63a0c181c2d4edd387795c0f
   languageName: node
   linkType: hard
 
@@ -9565,7 +9574,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"classnames@npm:^2.3.1":
+"classnames@npm:^2.3.1, classnames@npm:^2.3.2":
   version: 2.3.2
   resolution: "classnames@npm:2.3.2"
   checksum: cd50ead57b4f97436aaa9f9885c6926323efc7c2bea8e3d4eb10e4e972aa6a1cfca1c7a0e06f8a199ca7498d4339e30bb6002e589e61c9f21248cbf3e8b0b18d
@@ -14465,12 +14474,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"i18next@npm:^22.0.6":
-  version: 22.0.6
-  resolution: "i18next@npm:22.0.6"
+"i18next@npm:^22.4.6":
+  version: 22.4.6
+  resolution: "i18next@npm:22.4.6"
   dependencies:
-    "@babel/runtime": ^7.17.2
-  checksum: 32bf96be5f620e7a5d1b82a0dc9ab7acae318a58769349405e22251c48564f54e9513efe0f0a8404caa1d0cd0f73a03a9e2bd16846f7bd255b5777c22b60ddda
+    "@babel/runtime": ^7.20.6
+  checksum: 58b125b3dd110382547a0a54de5035fe8b613d5cf5922b59726c006172af9b2ba5e8f83d66150c21b075c0b0892acc794b0a2535718060b13c83a064dac5e22a
   languageName: node
   linkType: hard
 
@@ -20321,9 +20330,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-i18next@npm:^12.0.0":
-  version: 12.0.0
-  resolution: "react-i18next@npm:12.0.0"
+"react-i18next@npm:^12.1.1":
+  version: 12.1.1
+  resolution: "react-i18next@npm:12.1.1"
   dependencies:
     "@babel/runtime": ^7.14.5
     html-parse-stringify: ^3.0.1
@@ -20335,7 +20344,7 @@ __metadata:
       optional: true
     react-native:
       optional: true
-  checksum: 77dda539597553727aec2bcceaa2d9a352ef3053972de8b510ec7f3a6296452e774559ab27f4ddd1520282ad71347ab0319f170fd89aa16ac4e9131a37a383e7
+  checksum: ab793381f1fa4cbb282fc42e54da05e39783f3e165fca8413b659914baea1fcd7ecfc466ccced3e991428a83e99101f3c3a238cf7d37efc570562de835d3eced
   languageName: node
   linkType: hard
 
@@ -24246,16 +24255,17 @@ __metadata:
     "@redwoodjs/web": ^3.6.1
     "@simplewebauthn/browser": ^6.2.2
     autoprefixer: ^10.4.13
+    classnames: ^2.3.2
     humanize-string: 2.1.0
     i18n: ^0.15.1
-    i18next: ^22.0.6
+    i18next: ^22.4.6
     i18next-browser-languagedetector: ^7.0.1
     postcss: ^8.4.19
     postcss-loader: ^7.0.1
     prop-types: 15.8.1
     react: 17.0.2
     react-dom: 17.0.2
-    react-i18next: ^12.0.0
+    react-i18next: ^12.1.1
     tailwindcss: ^3.2.4
   languageName: unknown
   linkType: soft

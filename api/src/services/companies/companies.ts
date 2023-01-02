@@ -47,7 +47,13 @@ export const Company: CompanyRelationResolvers = {
   cars: (_obj, { root }) => {
     return db.company.findUnique({ where: { id: root?.id } }).cars()
   },
-  users: (_obj, { root }) => {
-    return db.company.findUnique({ where: { id: root?.id } }).users()
+  createdByUser: (_obj, { root }) => {
+    return db.company.findUnique({ where: { id: root?.id } }).createdByUser()
+  },
+  updatedByUser: (_obj, { root }) => {
+    return db.company.findUnique({ where: { id: root?.id } }).updatedByUser()
+  },
+  User: (_obj, { root }) => {
+    return db.company.findUnique({ where: { id: root?.id } }).User()
   },
 }

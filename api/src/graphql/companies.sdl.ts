@@ -2,18 +2,21 @@ export const schema = gql`
   type Company {
     id: Int!
     name: String!
-    address1: String!
-    address2: String!
+    address1: String
+    address2: String
     city: String!
     zipcode: String!
     country: String!
     createdAt: DateTime!
-    updateAt: DateTime!
-    createdBy: Int!
-    updatedBy: Int!
+    updateAt: DateTime
+    createdBy: Int
+    updatedBy: Int
     drivers: [Driver]!
     cars: [Car]!
-    users: [UserCompany]!
+    createdByUser: User
+    updatedByUser: User
+    User: User
+    userId: Int
   }
 
   type Query {
@@ -23,14 +26,15 @@ export const schema = gql`
 
   input CreateCompanyInput {
     name: String!
-    address1: String!
-    address2: String!
+    address1: String
+    address2: String
     city: String!
     zipcode: String!
     country: String!
-    updateAt: DateTime!
-    createdBy: Int!
-    updatedBy: Int!
+    updateAt: DateTime
+    createdBy: Int
+    updatedBy: Int
+    userId: Int
   }
 
   input UpdateCompanyInput {
@@ -43,6 +47,7 @@ export const schema = gql`
     updateAt: DateTime
     createdBy: Int
     updatedBy: Int
+    userId: Int
   }
 
   type Mutation {

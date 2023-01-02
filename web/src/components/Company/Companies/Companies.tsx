@@ -1,11 +1,15 @@
+import { useTranslation } from 'react-i18next'
+import type {
+  DeleteCompanyMutationVariables,
+  FindCompanies,
+} from 'types/graphql'
+
 import { Link, routes } from '@redwoodjs/router'
 import { useMutation } from '@redwoodjs/web'
 import { toast } from '@redwoodjs/web/toast'
 
 import { QUERY } from 'src/components/Company/CompaniesCell'
 import { timeTag, truncate } from 'src/lib/formatters'
-
-import type { DeleteCompanyMutationVariables, FindCompanies } from 'types/graphql'
 
 const DELETE_COMPANY_MUTATION = gql`
   mutation DeleteCompanyMutation($id: Int!) {
@@ -16,6 +20,7 @@ const DELETE_COMPANY_MUTATION = gql`
 `
 
 const CompaniesList = ({ companies }: FindCompanies) => {
+  const { t, i18n } = useTranslation()
   const [deleteCompany] = useMutation(DELETE_COMPANY_MUTATION, {
     onCompleted: () => {
       toast.success('Company deleted')
@@ -31,27 +36,26 @@ const CompaniesList = ({ companies }: FindCompanies) => {
   })
 
   const onDeleteClick = (id: DeleteCompanyMutationVariables['id']) => {
-    if (confirm('Are you sure you want to delete company ' + id + '?')) {
+    if (confirm(t('Are you sure you want to delete company ') + id + '?')) {
       deleteCompany({ variables: { id } })
     }
   }
 
+  document.body.dir = i18n.dir()
   return (
     <div className="rw-segment rw-table-wrapper-responsive">
       <table className="rw-table">
         <thead>
           <tr>
-            <th>Id</th>
-            <th>Name</th>
-            <th>Address1</th>
-            <th>Address2</th>
-            <th>City</th>
-            <th>Zipcode</th>
-            <th>Country</th>
-            <th>Created at</th>
-            <th>Update at</th>
-            <th>Created by</th>
-            <th>Updated by</th>
+            <th>{t('ID')}</th>
+            <th className="w-36">{t('Name')}</th>
+            <th>{t('Address')} 1</th>
+            <th>{t('Address')} 2</th>
+            <th>{t('City')}</th>
+            <th>{t('Zipcode')}</th>
+            <th>{t('Country')}</th>
+            <th>{t('Created At')}</th>
+            <th>{t('Updated At')}</th>
             <th>&nbsp;</th>
           </tr>
         </thead>
@@ -65,10 +69,28 @@ const CompaniesList = ({ companies }: FindCompanies) => {
               <td>{truncate(company.city)}</td>
               <td>{truncate(company.zipcode)}</td>
               <td>{truncate(company.country)}</td>
-              <td>{timeTag(company.createdAt)}</td>
-              <td>{timeTag(company.updateAt)}</td>
-              <td>{truncate(company.createdBy)}</td>
-              <td>{truncate(company.updatedBy)}</td>
+              <td className="text-center text-xs">
+                {timeTag(company.createdAt, i18n.language)}
+                <br />
+                <Link
+                  to={routes.user({ id: company?.createdBy })}
+                  className="rw-button rw-button-small"
+                >
+                  {truncate(company?.createdByUser?.firstName)}{' '}
+                  {truncate(company?.createdByUser?.lastName)}
+                </Link>
+              </td>
+              <td className="text-center">
+                {timeTag(company.updateAt, i18n.language)}
+                <br />
+                <Link
+                  to={routes.user({ id: company?.updatedBy })}
+                  className="rw-button rw-button-small"
+                >
+                  {truncate(company?.updatedByUser?.firstName)}{' '}
+                  {truncate(company?.updatedByUser?.lastName)}
+                </Link>
+              </td>
               <td>
                 <nav className="rw-table-actions">
                   <Link
@@ -76,14 +98,14 @@ const CompaniesList = ({ companies }: FindCompanies) => {
                     title={'Show company ' + company.id + ' detail'}
                     className="rw-button rw-button-small"
                   >
-                    Show
+                    {t('Show')}
                   </Link>
                   <Link
                     to={routes.editCompany({ id: company.id })}
                     title={'Edit company ' + company.id}
                     className="rw-button rw-button-small rw-button-blue"
                   >
-                    Edit
+                    {t('Edit')}
                   </Link>
                   <button
                     type="button"
@@ -91,7 +113,7 @@ const CompaniesList = ({ companies }: FindCompanies) => {
                     className="rw-button rw-button-small rw-button-red"
                     onClick={() => onDeleteClick(company.id)}
                   >
-                    Delete
+                    {t('Delete')}
                   </button>
                 </nav>
               </td>

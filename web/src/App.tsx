@@ -8,7 +8,7 @@ import Routes from 'src/Routes'
 
 import './scaffold.css'
 import './index.css'
-import './i18n/i18n'
+import './i18n'
 import './i18n'
 
 const App = () => (

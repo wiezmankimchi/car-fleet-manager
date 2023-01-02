@@ -4,9 +4,11 @@ export const schema = gql`
     userId: Int!
     roleId: Int!
     createdAt: DateTime!
-    updateAt: DateTime!
-    createdBy: Int!
-    updatedBy: Int!
+    updateAt: DateTime
+    createdBy: Int
+    updatedBy: Int
+    createdByUser: User
+    updatedByUser: User
     user: User!
     role: Role!
   }
@@ -19,9 +21,9 @@ export const schema = gql`
   input CreateUserRoleInput {
     userId: Int!
     roleId: Int!
-    updateAt: DateTime!
-    createdBy: Int!
-    updatedBy: Int!
+    updateAt: DateTime
+    createdBy: Int
+    updatedBy: Int
   }
 
   input UpdateUserRoleInput {

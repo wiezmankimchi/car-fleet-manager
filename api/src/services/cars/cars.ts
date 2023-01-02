@@ -36,6 +36,12 @@ export const deleteCar: MutationResolvers['deleteCar'] = ({ id }) => {
 }
 
 export const Car: CarRelationResolvers = {
+  createdByUser: (_obj, { root }) => {
+    return db.car.findUnique({ where: { id: root?.id } }).createdByUser()
+  },
+  updatedByUser: (_obj, { root }) => {
+    return db.car.findUnique({ where: { id: root?.id } }).updatedByUser()
+  },
   carmake: (_obj, { root }) => {
     return db.car.findUnique({ where: { id: root?.id } }).carmake()
   },
@@ -44,5 +50,8 @@ export const Car: CarRelationResolvers = {
   },
   company: (_obj, { root }) => {
     return db.car.findUnique({ where: { id: root?.id } }).company()
+  },
+  User: (_obj, { root }) => {
+    return db.car.findUnique({ where: { id: root?.id } }).User()
   },
 }

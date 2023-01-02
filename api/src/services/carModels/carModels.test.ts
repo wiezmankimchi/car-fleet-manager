@@ -30,16 +30,10 @@ describe('carModels', () => {
 
   scenario('creates a carModel', async () => {
     const result = await createCarModel({
-      input: {
-        name: 'String',
-        updateAt: '2022-11-25T18:11:55.820Z',
-        updatedBy: 7656494,
-      },
+      input: { name: 'String' },
     })
 
     expect(result.name).toEqual('String')
-    expect(result.updateAt).toEqual(new Date('2022-11-25T18:11:55.820Z'))
-    expect(result.updatedBy).toEqual(7656494)
   })
 
   scenario('updates a carModel', async (scenario: StandardScenario) => {

@@ -72,7 +72,7 @@ const UsersList = ({ users }: FindUsers) => {
                   </Link>
                   <Link
                     to={routes.editUser({ id: user.id })}
-                    title={'Edit user ' + user.id}
+                    title={t('Edit user ') + user.id}
                     className="rw-button rw-button-small rw-button-blue"
                   >
                     {t('Edit')}

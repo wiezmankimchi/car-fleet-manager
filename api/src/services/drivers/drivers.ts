@@ -39,6 +39,12 @@ export const deleteDriver: MutationResolvers['deleteDriver'] = ({ id }) => {
 }
 
 export const Driver: DriverRelationResolvers = {
+  createdByUser: (_obj, { root }) => {
+    return db.driver.findUnique({ where: { id: root?.id } }).createdByUser()
+  },
+  updatedByUser: (_obj, { root }) => {
+    return db.driver.findUnique({ where: { id: root?.id } }).updatedByUser()
+  },
   company: (_obj, { root }) => {
     return db.driver.findUnique({ where: { id: root?.id } }).company()
   },

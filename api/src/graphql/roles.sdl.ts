@@ -3,9 +3,11 @@ export const schema = gql`
     id: Int!
     name: String!
     createdAt: DateTime!
-    updateAt: DateTime!
-    createdBy: Int!
-    updatedBy: Int!
+    updateAt: DateTime
+    createdBy: Int
+    updatedBy: Int
+    createdByUser: User
+    updatedByUser: User
     users: [UserRole]!
   }
 
@@ -16,9 +18,9 @@ export const schema = gql`
 
   input CreateRoleInput {
     name: String!
-    updateAt: DateTime!
-    createdBy: Int!
-    updatedBy: Int!
+    updateAt: DateTime
+    createdBy: Int
+    updatedBy: Int
   }
 
   input UpdateRoleInput {

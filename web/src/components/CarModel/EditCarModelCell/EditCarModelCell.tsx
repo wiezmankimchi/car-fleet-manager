@@ -1,5 +1,6 @@
 import type { EditCarModelById, UpdateCarModelInput } from 'types/graphql'
 
+import { useAuth } from '@redwoodjs/auth'
 import { navigate, routes } from '@redwoodjs/router'
 import type { CellSuccessProps, CellFailureProps } from '@redwoodjs/web'
 import { useMutation } from '@redwoodjs/web'
@@ -39,6 +40,7 @@ export const Failure = ({ error }: CellFailureProps) => (
 )
 
 export const Success = ({ carModel }: CellSuccessProps<EditCarModelById>) => {
+  const { currentUser } = useAuth()
   const [updateCarModel, { loading, error }] = useMutation(
     UPDATE_CAR_MODEL_MUTATION,
     {
@@ -56,16 +58,25 @@ export const Success = ({ carModel }: CellSuccessProps<EditCarModelById>) => {
     input: UpdateCarModelInput,
     id: EditCarModelById['carModel']['id']
   ) => {
+    input.updatedBy = currentUser.id
+    input.updateAt = new Date().toISOString()
     updateCarModel({ variables: { id, input } })
   }
 
   return (
     <div className="rw-segment">
       <header className="rw-segment-header">
-        <h2 className="rw-heading rw-heading-secondary">Edit CarModel {carModel?.id}</h2>
+        <h2 className="rw-heading rw-heading-secondary">
+          Edit CarModel {carModel?.id}
+        </h2>
       </header>
       <div className="rw-segment-main">
-        <CarModelForm carModel={carModel} onSave={onSave} error={error} loading={loading} />
+        <CarModelForm
+          carModel={carModel}
+          onSave={onSave}
+          error={error}
+          loading={loading}
+        />
       </div>
     </div>
   )

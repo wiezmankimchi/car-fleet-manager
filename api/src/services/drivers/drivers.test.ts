@@ -1,4 +1,4 @@
-import type { driver } from '@prisma/client'
+import type { Driver } from '@prisma/client'
 
 import {
   drivers,
@@ -34,24 +34,20 @@ describe('drivers', () => {
         name: 'String',
         email: 'String',
         phone: 'String',
-        dob: '2022-11-25T18:12:31.348Z',
+        dob: '2022-12-31T03:35:40.631Z',
         companyId: scenario.driver.two.companyId,
-        updateAt: '2022-11-25T18:12:31.348Z',
-        updatedBy: 3606879,
       },
     })
 
     expect(result.name).toEqual('String')
     expect(result.email).toEqual('String')
     expect(result.phone).toEqual('String')
-    expect(result.dob).toEqual(new Date('2022-11-25T18:12:31.348Z'))
+    expect(result.dob).toEqual(new Date('2022-12-31T03:35:40.631Z'))
     expect(result.companyId).toEqual(scenario.driver.two.companyId)
-    expect(result.updateAt).toEqual(new Date('2022-11-25T18:12:31.348Z'))
-    expect(result.updatedBy).toEqual(3606879)
   })
 
   scenario('updates a driver', async (scenario: StandardScenario) => {
-    const original = (await driver({ id: scenario.driver.one.id })) as driver
+    const original = (await driver({ id: scenario.driver.one.id })) as Driver
     const result = await updateDriver({
       id: original.id,
       input: { name: 'String2' },
@@ -63,7 +59,7 @@ describe('drivers', () => {
   scenario('deletes a driver', async (scenario: StandardScenario) => {
     const original = (await deleteDriver({
       id: scenario.driver.one.id,
-    })) as driver
+    })) as Driver
     const result = await driver({ id: original.id })
 
     expect(result).toEqual(null)
