@@ -19,7 +19,12 @@ const CarModelsPage = ({ page, limit }: AllModesProps) => {
 
   return (
     <>
-      <CarModelsCell page={page} perPage={pageLimit} onChange={onChangeLimit} />
+      <CarModelsCell
+        page={page}
+        perPage={pageLimit}
+        onChange={onChangeLimit}
+        allModels={undefined}
+      />
     </>
   )
 }

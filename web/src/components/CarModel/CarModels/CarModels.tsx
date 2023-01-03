@@ -1,4 +1,4 @@
-import { useTranslation } from 'react-i18next'
+import { useTranslation, Trans } from 'react-i18next'
 import type {
   DeleteCarModelMutationVariables,
   FindCarModels,
@@ -19,7 +19,7 @@ const DELETE_CAR_MODEL_MUTATION = gql`
   }
 `
 
-const CarModelsList = ({ carModels }: FindCarModels) => {
+const CarModelsList = ({ carModels, count }: FindCarModels) => {
   const { t, i18n } = useTranslation()
 
   const [deleteCarModel] = useMutation(DELETE_CAR_MODEL_MUTATION, {
@@ -91,14 +91,14 @@ const CarModelsList = ({ carModels }: FindCarModels) => {
                     title={'Show carModel ' + carModel.id + ' detail'}
                     className="rw-button rw-button-small"
                   >
-                    Show
+                    {t('Show')}
                   </Link>
                   <Link
                     to={routes.editCarModel({ id: carModel.id })}
                     title={'Edit carModel ' + carModel.id}
                     className="rw-button rw-button-small rw-button-blue"
                   >
-                    Edit
+                    {t('Edit')}
                   </Link>
                   <button
                     type="button"
@@ -106,12 +106,19 @@ const CarModelsList = ({ carModels }: FindCarModels) => {
                     className="rw-button rw-button-small rw-button-red"
                     onClick={() => onDeleteClick(carModel.id)}
                   >
-                    Delete
+                    {t('Delete')}
                   </button>
                 </nav>
               </td>
             </tr>
           ))}
+          <tr>
+            <td colSpan="5">
+              <Trans i18nKey={'recordCount'}>
+                There are:{{ totalCount: count }} records
+              </Trans>
+            </td>
+          </tr>
         </tbody>
       </table>
     </div>

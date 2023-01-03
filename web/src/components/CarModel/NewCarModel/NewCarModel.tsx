@@ -24,7 +24,7 @@ const NewCarModel = () => {
     CREATE_CAR_MODEL_MUTATION,
     {
       onCompleted: () => {
-        toast.success('CarModel created')
+        toast.success('Car Brand created')
         navigate(routes.carModels())
       },
       onError: (error) => {

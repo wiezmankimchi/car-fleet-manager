@@ -12,16 +12,11 @@ import { Set, Router, Route, Private } from '@redwoodjs/router'
 import ScaffoldLayout from 'src/layouts/ScaffoldLayout'
 
 import MainLayout from './layouts/MainLayout/MainLayout'
-import AllModelsPage from './pages/AllModelsPage/AllModelsPage'
 
 const Routes = () => {
   return (
     <Router>
       <Route path="/support" page={SupportPage} name="support" />
-      <Set>
-        <Route path="/allmodels" page={AllModelsPage} name="allModels" />
-        <Route path="/allmodels/{page:Int}/{limit:Int}" page={AllModelsPage} name="allModelsPage" />
-      </Set>
       <Route path="/alerts" page={AlertsPage} name="alerts" />
       <Set wrap={[MainLayout, ScaffoldLayout]} title="UserRoles" titleTo="userRoles" buttonLabel="New UserRole" buttonTo="newUserRole">
         <Route path="/user-roles/new" page={UserRoleNewUserRolePage} name="newUserRole" />
@@ -42,10 +37,11 @@ const Routes = () => {
         <Route path="/drivers/{id:Int}" page={DriverDriverPage} name="driver" />
         <Route path="/drivers" page={DriverDriversPage} name="drivers" />
       </Set>
-      <Set wrap={[MainLayout, ScaffoldLayout]} title="Car Models Makes" titleTo="carModelMakes" buttonLabel="New CarModelMake" buttonTo="newCarModelMake">
+      <Set wrap={[MainLayout, ScaffoldLayout]} title="Car Models" titleTo="carModelMakes" buttonLabel="New Car Model" buttonTo="newCarModelMake">
         <Route path="/car-model-makes/new" page={CarModelMakeNewCarModelMakePage} name="newCarModelMake" />
         <Route path="/car-model-makes/{id:Int}/edit" page={CarModelMakeEditCarModelMakePage} name="editCarModelMake" />
         <Route path="/car-model-makes/{id:Int}" page={CarModelMakeCarModelMakePage} name="carModelMake" />
+        <Route path="/car-model-makes/{page:Int}/{limit:Int}" page={CarModelMakeCarModelMakesPage} name="carModelMakesPage" />
         <Route path="/car-model-makes" page={CarModelMakeCarModelMakesPage} name="carModelMakes" />
       </Set>
       <Set wrap={[MainLayout, ScaffoldLayout]} title="Car Brands" titleTo="carModels" buttonLabel="New Car Brand" buttonTo="newCarModel">

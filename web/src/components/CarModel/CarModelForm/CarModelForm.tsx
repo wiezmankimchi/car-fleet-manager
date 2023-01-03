@@ -1,7 +1,6 @@
 import { useTranslation } from 'react-i18next'
 import type { EditCarModelById, UpdateCarModelInput } from 'types/graphql'
 
-import { useAuth } from '@redwoodjs/auth'
 import {
   Form,
   FormError,
@@ -23,7 +22,7 @@ interface CarModelFormProps {
 
 const CarModelForm = (props: CarModelFormProps) => {
   const { t, i18n } = useTranslation()
-  const { currentUser } = useAuth()
+
   const onSubmit = (data: FormCarModel) => {
     props.onSave(data, props?.carModel?.id)
   }
@@ -38,9 +37,6 @@ const CarModelForm = (props: CarModelFormProps) => {
           titleClassName="rw-form-error-title"
           listClassName="rw-form-error-list"
         />
-        {/* <Label name="CurrentUser" className="rw-label">
-          Current Logged In User ID - {currentUser.id}
-        </Label> */}
         <Label
           name="name"
           className="rw-label rtl:text-right"

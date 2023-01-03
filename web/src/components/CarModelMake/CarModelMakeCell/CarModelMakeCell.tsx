@@ -9,11 +9,25 @@ export const QUERY = gql`
     carModelMake: carModelMake(id: $id) {
       id
       name
-      createdAt
-      updateAt
-      createdBy
-      updatedBy
       carMakeId
+      createdAt
+      createdBy
+      updateAt
+      updatedBy
+      createdByUser {
+        id
+        firstName
+        lastName
+      }
+      updatedByUser {
+        id
+        firstName
+        lastName
+      }
+      make {
+        id
+        name
+      }
     }
   }
 `
@@ -26,6 +40,8 @@ export const Failure = ({ error }: CellFailureProps) => (
   <div className="rw-cell-error">{error?.message}</div>
 )
 
-export const Success = ({ carModelMake }: CellSuccessProps<FindCarModelMakeById>) => {
+export const Success = ({
+  carModelMake,
+}: CellSuccessProps<FindCarModelMakeById>) => {
   return <CarModelMake carModelMake={carModelMake} />
 }

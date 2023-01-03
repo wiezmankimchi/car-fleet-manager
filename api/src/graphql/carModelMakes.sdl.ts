@@ -15,8 +15,14 @@ export const schema = gql`
     userId: Int
   }
 
+  type ModelMakeSet {
+    makeModels: [CarModelMake]!
+    count: Int!
+  }
+
   type Query {
-    carModelMakes: [CarModelMake!]! @requireAuth
+    allMakeModels(page: Int, limit: Int): ModelMakeSet @skipAuth
+    carModelMakes: [CarModelMake!]! @skipAuth
     carModelMake(id: Int!): CarModelMake @requireAuth
   }
 

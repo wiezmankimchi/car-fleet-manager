@@ -10,6 +10,23 @@ export const carModelMakes: QueryResolvers['carModelMakes'] = () => {
   return db.carModelMake.findMany()
 }
 
+export const allMakeModels = ({
+  page = 1,
+  limit = 5,
+  order = { name: 'asc' },
+}) => {
+  const offset = (page - 1) * limit
+
+  return {
+    makeModels: db.carModelMake.findMany({
+      take: limit,
+      skip: offset,
+      orderBy: order,
+    }),
+    count: db.carModelMake.count(),
+  }
+}
+
 export const carModelMake: QueryResolvers['carModelMake'] = ({ id }) => {
   return db.carModelMake.findUnique({
     where: { id },

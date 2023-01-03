@@ -1,9 +1,9 @@
-// import type { FindCarModels, ModelsPage } from 'types/graphql'
 import { useTranslation } from 'react-i18next'
+// import type { Query } from 'types/graphql'
 
 import { Form, SelectField } from '@redwoodjs/forms'
 import { Link, routes } from '@redwoodjs/router'
-import type { CellSuccessProps, CellFailureProps } from '@redwoodjs/web'
+import type { CellFailureProps } from '@redwoodjs/web'
 
 import CarModels from 'src/components/CarModel/CarModels'
 import Pagination from 'src/components/Pagination/Pagination'
@@ -22,6 +22,8 @@ export const QUERY = gql`
         name
         createdBy
         updatedBy
+        createdAt
+        updateAt
         createdByUser {
           id
           firstName
@@ -88,7 +90,7 @@ export const Success = ({ allModels, page, perPage = 5, onChange }) => {
   document.body.dir = i18n.dir()
   return (
     <>
-      <CarModels carModels={allModels.models} />
+      <CarModels carModels={allModels.models} count={allModels.count} />
       <div className="flex justify-evenly">
         <Pagination
           count={allModels.count}

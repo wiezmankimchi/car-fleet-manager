@@ -64,11 +64,13 @@ const CarModel = ({ carModel }: Props) => {
             <tr>
               <th>{t('Created At')}</th>
 
-              <td className="text-xs">
-                {timeTag(carModel.createdAt, i18n.language)}
+              <td className="flex text-xs">
+                <div className="justify-start py-2">
+                  {timeTag(carModel.createdAt, i18n.language)}
+                </div>
                 <Link
                   to={routes.user({ id: carModel?.createdBy })}
-                  className="m-3 text-xs"
+                  className="rw-button mx-4 w-32 justify-start p-1"
                 >
                   {truncate(carModel?.createdByUser?.firstName)}{' '}
                   {truncate(carModel?.createdByUser?.lastName)}
@@ -78,11 +80,13 @@ const CarModel = ({ carModel }: Props) => {
 
             <tr>
               <th>{t('Updated At')}</th>
-              <td className="text-xs">
-                {timeTag(carModel.updateAt, i18n.language)}
+              <td className="flex text-xs">
+                <div className="justify-start py-2">
+                  {timeTag(carModel.updateAt, i18n.language)}
+                </div>
                 <Link
                   to={routes.user({ id: carModel?.updatedBy })}
-                  className="m-3 text-xs"
+                  className="rw-button mx-4 w-32 justify-start p-1"
                 >
                   {truncate(carModel?.updatedByUser?.firstName)}{' '}
                   {truncate(carModel?.updatedByUser?.lastName)}
