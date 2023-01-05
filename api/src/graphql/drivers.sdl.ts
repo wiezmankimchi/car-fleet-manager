@@ -5,6 +5,9 @@ export const schema = gql`
     email: String!
     phone: String!
     dob: DateTime!
+    registrationNumber: String!
+    registrationEndDate: DateTime!
+    registrationImageURL: String!
     companyId: Int!
     createdAt: DateTime!
     updateAt: DateTime
@@ -16,8 +19,14 @@ export const schema = gql`
     cars: [Car]!
   }
 
+  type DriverSet {
+    drivers: [Driver]!
+    count: Int!
+  }
+
   type Query {
-    drivers: [Driver!]! @requireAuth
+    allDrivers(page: Int, limit: Int): DriverSet @skipAuth
+    drivers: [Driver!]! @skipAuth
     driver(id: Int!): Driver @requireAuth
   }
 
@@ -26,6 +35,9 @@ export const schema = gql`
     email: String!
     phone: String!
     dob: DateTime!
+    registrationNumber: String!
+    registrationEndDate: DateTime!
+    registrationImageURL: String!
     companyId: Int!
     updateAt: DateTime
     createdBy: Int
@@ -37,6 +49,9 @@ export const schema = gql`
     email: String
     phone: String
     dob: DateTime
+    registrationNumber: String
+    registrationEndDate: DateTime
+    registrationImageURL: String
     companyId: Int
     updateAt: DateTime
     createdBy: Int

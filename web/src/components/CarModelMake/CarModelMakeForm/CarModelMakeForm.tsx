@@ -4,6 +4,7 @@ import type {
   UpdateCarModelMakeInput,
 } from 'types/graphql'
 
+import { useAuth } from '@redwoodjs/auth'
 import {
   Form,
   FormError,
@@ -27,7 +28,9 @@ interface CarModelMakeFormProps {
 
 const CarModelMakeForm = (props: CarModelMakeFormProps) => {
   const { t, i18n } = useTranslation()
+  const { currentUser } = useAuth()
   const onSubmit = (data: FormCarModelMake) => {
+    data.createdBy = currentUser.id
     data.carMakeId = parseInt(data.carMakeId)
     props.onSave(data, props?.carModelMake?.id)
   }

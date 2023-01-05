@@ -35,6 +35,7 @@ const Routes = () => {
         <Route path="/drivers/new" page={DriverNewDriverPage} name="newDriver" />
         <Route path="/drivers/{id:Int}/edit" page={DriverEditDriverPage} name="editDriver" />
         <Route path="/drivers/{id:Int}" page={DriverDriverPage} name="driver" />
+        <Route path="/drivers/{page:Int}/{limit:Int}" page={DriverDriversPage} name="driversPaged" />
         <Route path="/drivers" page={DriverDriversPage} name="drivers" />
       </Set>
       <Set wrap={[MainLayout, ScaffoldLayout]} title="Car Models" titleTo="carModelMakes" buttonLabel="New Car Model" buttonTo="newCarModelMake">

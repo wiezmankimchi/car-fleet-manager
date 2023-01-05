@@ -1,8 +1,5 @@
 import { useTranslation, Trans } from 'react-i18next'
-import type {
-  DeleteCarModelMakeMutationVariables,
-  FindCarModelMakes,
-} from 'types/graphql'
+import type { DeleteCarModelMakeMutationVariables } from 'types/graphql'
 
 import { Link, routes } from '@redwoodjs/router'
 import { useMutation } from '@redwoodjs/web'
@@ -19,7 +16,7 @@ const DELETE_CAR_MODEL_MAKE_MUTATION = gql`
   }
 `
 
-const CarModelMakesList = ({ carModelMakes, count }: FindCarModelMakes) => {
+const CarModelMakesList = ({ carModelMakes, count }) => {
   const { t, i18n } = useTranslation()
   const [deleteCarModelMake] = useMutation(DELETE_CAR_MODEL_MAKE_MUTATION, {
     onCompleted: () => {
@@ -112,7 +109,7 @@ const CarModelMakesList = ({ carModelMakes, count }: FindCarModelMakes) => {
             </tr>
           ))}
           <tr>
-            <td colSpan="5">
+            <td colSpan={5}>
               <Trans i18nKey={'recordCount'}>
                 There are:{{ totalCount: count }} records
               </Trans>

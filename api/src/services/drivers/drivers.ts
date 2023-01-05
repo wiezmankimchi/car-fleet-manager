@@ -10,6 +10,15 @@ export const drivers: QueryResolvers['drivers'] = () => {
   return db.driver.findMany()
 }
 
+export const allDrivers = ({ page = 1, limit = 5, order = { id: 'asc' } }) => {
+  const offset = (page - 1) * limit
+
+  return {
+    drivers: db.driver.findMany({ take: limit, skip: offset, orderBy: order }),
+    count: db.driver.count(),
+  }
+}
+
 export const driver: QueryResolvers['driver'] = ({ id }) => {
   return db.driver.findUnique({
     where: { id },

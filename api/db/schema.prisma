@@ -79,22 +79,22 @@ model UserRole {
 }
 
 model Company {
-  id            Int           @id @default(autoincrement())
-  name          String        @unique
+  id            Int       @id @default(autoincrement())
+  name          String    @unique
   address1      String?
   address2      String?
   city          String
   zipcode       String
   country       String
-  createdAt     DateTime      @default(now())
+  createdAt     DateTime  @default(now())
   updateAt      DateTime?
-  createdBy     Int?          @default(0)
+  createdBy     Int?      @default(0)
   updatedBy     Int?
   drivers       Driver[]
   cars          Car[]
-  createdByUser User?         @relation(fields: [createdBy], references: [id], name: "companyCreatedByUser")
-  updatedByUser User?         @relation(fields: [updatedBy], references: [id], name: "companyUpdatedByUser")
-  User          User?         @relation(fields: [userId], references: [id])
+  createdByUser User?     @relation(fields: [createdBy], references: [id], name: "companyCreatedByUser")
+  updatedByUser User?     @relation(fields: [updatedBy], references: [id], name: "companyUpdatedByUser")
+  User          User?     @relation(fields: [userId], references: [id])
   userId        Int?
 }
 
@@ -125,24 +125,27 @@ model CarModelMake {
   make          CarModel  @relation(fields: [carMakeId], references: [id])
   cars          Car[]
   User          User?     @relation(fields: [userId], references: [id])
-  userId        Int?
+  userId        Int?  
 }
 
 model Driver {
-  id            Int       @id @default(autoincrement())
-  name          String
-  email         String
-  phone         String
-  dob           DateTime
-  companyId     Int
-  createdAt     DateTime  @default(now())
-  updateAt      DateTime?
-  createdBy     Int?      @default(0)
-  updatedBy     Int?
-  createdByUser User?     @relation(fields: [createdBy], references: [id], name: "driverCreatedByUser")
-  updatedByUser User?     @relation(fields: [updatedBy], references: [id], name: "driverUpdatedByUser")
-  company       Company?  @relation(fields: [companyId], references: [id])
-  cars          Car[]
+  id                   Int       @id @default(autoincrement())
+  name                 String
+  email                String
+  phone                String
+  dob                  DateTime
+  registrationNumber   String
+  registrationEndDate  DateTime
+  registrationImageURL String
+  companyId            Int
+  createdAt            DateTime  @default(now())
+  updateAt             DateTime?
+  createdBy            Int?      @default(0)
+  updatedBy            Int?
+  createdByUser        User?     @relation(fields: [createdBy], references: [id], name: "driverCreatedByUser")
+  updatedByUser        User?     @relation(fields: [updatedBy], references: [id], name: "driverUpdatedByUser")
+  company              Company?  @relation(fields: [companyId], references: [id])
+  cars                 Car[]
 }
 
 model Car {
@@ -164,5 +167,3 @@ model Car {
   User          User?        @relation(fields: [userId], references: [id])
   userId        Int?
 }
-
-

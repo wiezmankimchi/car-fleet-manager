@@ -1,5 +1,4 @@
-import { useTranslation } from 'react-i18next'
-import type { FindCarModelMakes } from 'types/graphql'
+import { useTranslation, Trans } from 'react-i18next'
 
 import { Form, SelectField } from '@redwoodjs/forms'
 import { Link, routes } from '@redwoodjs/router'
@@ -61,6 +60,10 @@ export const QUERY = gql`
 
 export const Loading = () => <div>Loading...</div>
 
+export const isEmpty = (data) => {
+  return data?.allMakeModels.makeModels.length === 0
+}
+
 export const Empty = () => {
   return (
     <div className="rw-text-center">
@@ -76,7 +79,12 @@ export const Failure = ({ error }: CellFailureProps) => (
   <div className="rw-cell-error">{error?.message}</div>
 )
 
-export const Success = ({ allMakeModels, page, perPage = 5, onChange }) => {
+export const Success = ({
+  allMakeModels,
+  page,
+  perPage = 5,
+  onChange,
+}: CellSuccessProps) => {
   const { t, i18n } = useTranslation()
 
   document.body.dir = i18n.dir()
